@@ -1,47 +1,47 @@
 import { Events } from '@/enums/events';
 
-export interface Start {
+export type Start = {
   answers: AnswersData['answers'];
   stage: number;
   scores: PlayerData[];
-}
+};
 
-export interface Wait {
+export type Wait = {
   answers: AnswersData['answers'];
   correctAnswer: AnswersData['correctAnswer'];
   stage: number;
   scores: PlayerData[];
-}
+};
 
-export interface PlayerGuess {
+export type PlayerGuess = {
   index: number;
   answer: string;
   name: string;
   time: number;
-}
+};
 
-export interface AnswersData {
+export type AnswersData = {
   answers: string[];
   correctAnswer: string;
-}
+};
 
-export interface PlayerData {
+export type PlayerData = {
   name: string;
   score: number;
-}
+};
 
-export interface Results {
+export type Results = {
   correctAnswer: string;
   scores: PlayerData[];
-}
+};
 
-export interface SelectedAnswer {
+export type SelectedAnswer = {
   index: number;
   answer: string;
   time: number;
-}
+};
 
-export interface SocketEvents {
+export type SocketEvents = {
   [Events.Join]: (id: string) => void;
   [Events.Start]: (params: Start) => void;
   [Events.Wait]: (params: Wait) => void;
@@ -50,4 +50,4 @@ export interface SocketEvents {
   [Events.Results]: (data: Results) => void;
   [Events.Players]: (data: string[]) => void;
   [Events.Reset]: () => void;
-}
+};

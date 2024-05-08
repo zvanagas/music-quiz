@@ -1,4 +1,4 @@
-import { PlayerData } from '@/interfaces/events';
+import { PlayerData } from '@/types/events';
 import {
   Card,
   CardBody,
@@ -8,11 +8,11 @@ import {
   OrderedList,
 } from '@chakra-ui/react';
 
-interface PlayersProps {
+type PlayersProps = {
   players: PlayerData[];
-}
+};
 
-const Players: React.FC<PlayersProps> = ({ players }) => {
+export const Players = ({ players }: PlayersProps) => {
   return (
     <Card>
       <CardHeader>
@@ -30,5 +30,3 @@ const Players: React.FC<PlayersProps> = ({ players }) => {
     </Card>
   );
 };
-
-export default Players;

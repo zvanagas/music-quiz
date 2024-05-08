@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 type CountdownStates = 'idle' | 'running' | 'finished';
 
-const useCountdown = (onCountdownFinish?: () => void) => {
+export const useCountdown = (onCountdownFinish?: () => void) => {
   const [countdown, setCountdown] = useState(0);
   const [countdownState, setCountdownState] = useState<CountdownStates>('idle');
 
@@ -13,7 +13,7 @@ const useCountdown = (onCountdownFinish?: () => void) => {
 
   useEffect(() => {
     let interval: NodeJS.Timer;
-  
+
     if (countdownState === 'running') {
       interval = setInterval(() => setCountdown((prev) => prev - 1), 1000);
     }
@@ -33,7 +33,5 @@ const useCountdown = (onCountdownFinish?: () => void) => {
   return {
     countdown,
     startCountdown,
-  }
+  };
 };
-
-export default useCountdown;

@@ -1,5 +1,5 @@
 import { defineStyleConfig, extendTheme } from '@chakra-ui/react';
-import ConfettiStyles from './components/confetti/confetti.styles';
+import { ConfettiStyles } from './components/confetti/confetti.styles';
 
 const Button = defineStyleConfig({
   baseStyle: {

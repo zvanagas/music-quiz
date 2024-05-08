@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useSessionStorage } from '@/hooks/use-session-storage';
+import { useSessionStorage } from '@/hooks/use-session-storage.hook';
 import { useRouter } from 'next/router';
 import { Button, Flex, Input, Text } from '@chakra-ui/react';
-import Logo from '@/components/logo';
+import { Logo } from '@/components/logo';
 
 const Name: React.FC = () => {
   const [name, setName] = useState('');

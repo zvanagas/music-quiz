@@ -1,4 +1,4 @@
-import { PlayerGuess } from '@/interfaces/events';
+import { PlayerGuess } from '@/types/events';
 import {
   UnorderedList,
   ListItem,
@@ -8,11 +8,11 @@ import {
   Heading,
 } from '@chakra-ui/react';
 
-interface GuessesLogProps {
+type GuessesLogProps = {
   guesses: PlayerGuess[];
-}
+};
 
-const GuessesLog: React.FC<GuessesLogProps> = ({ guesses }) => {
+export const GuessesLog = ({ guesses }: GuessesLogProps) => {
   return (
     <Card>
       <CardHeader>
@@ -30,5 +30,3 @@ const GuessesLog: React.FC<GuessesLogProps> = ({ guesses }) => {
     </Card>
   );
 };
-
-export default GuessesLog;

@@ -1,6 +1,6 @@
 import { keyframes } from '@chakra-ui/react';
 
-const rain = keyframes`
+export const rain = keyframes`
 from {
   opacity: 0;
 }
@@ -11,5 +11,3 @@ to {
   transform: translateY(100vh);
 }
 `;
-
-export default rain;

@@ -1,22 +1,22 @@
 import { Card, CardBody, CardProps, HStack, Text } from '@chakra-ui/react';
-import Avatar from '../avatar';
+import { Avatar } from '../avatar';
 
-interface LeaderboardRowProps extends CardProps {
+type LeaderboardRowProps = CardProps & {
   place: number;
   name: string;
   score: number;
   isYours: boolean;
-}
+};
 
 const positionColors = ['red.600', 'green.600', 'blue.600'];
 
-const LeaderboardRow: React.FC<LeaderboardRowProps> = ({
+export const LeaderboardRow = ({
   place,
   name,
   score,
   isYours,
   sx,
-}) => {
+}: LeaderboardRowProps) => {
   return (
     <Card
       sx={sx}
@@ -45,5 +45,3 @@ const LeaderboardRow: React.FC<LeaderboardRowProps> = ({
     </Card>
   );
 };
-
-export default LeaderboardRow;

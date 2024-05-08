@@ -1,4 +1,4 @@
-import { SelectedAnswer } from '@/interfaces/events';
+import { SelectedAnswer } from '@/types/events';
 import { GameStates } from '@/types/game-states';
 import { Button, Divider, ThemingProps, Text } from '@chakra-ui/react';
 
@@ -9,21 +9,21 @@ const colorSchemes: ThemingProps['colorScheme'][] = [
   'red',
 ];
 
-interface AnswerProps {
+type AnswerProps = {
   index: number;
   selectedAnswer?: SelectedAnswer;
   fullSongName: string;
   gameState: GameStates;
   onClick: (song: string, index: number) => void;
-}
+};
 
-const Answer: React.FC<AnswerProps> = ({
+export const Answer = ({
   index,
   selectedAnswer,
   fullSongName,
   gameState,
   onClick,
-}) => {
+}: AnswerProps) => {
   const [artist, song] = fullSongName.split(' - ');
   const opacity =
     (selectedAnswer && selectedAnswer.answer !== fullSongName) ||
@@ -48,5 +48,3 @@ const Answer: React.FC<AnswerProps> = ({
     </Button>
   );
 };
-
-export default Answer;

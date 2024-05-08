@@ -1,6 +1,6 @@
 import { Box, useMultiStyleConfig } from '@chakra-ui/react';
 
-const Confetti = () => {
+export const Confetti = () => {
   const { confetti, confettiPiece } = useMultiStyleConfig('ConfettiStyles');
   return (
     <Box sx={confetti}>
@@ -20,5 +20,3 @@ const Confetti = () => {
     </Box>
   );
 };
-
-export default Confetti;

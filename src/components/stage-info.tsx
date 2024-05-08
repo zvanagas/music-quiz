@@ -9,31 +9,35 @@ import {
   OrderedList,
   ListItem,
   Divider,
+  Button,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 
-interface StageInfoProps {
+type StageInfoProps = {
   stage: number;
   gameState: GameStates;
   countdown: number;
   guessCountdown: number;
   stageAnswers: string[];
   correctAnswer: string;
-}
+};
 
-const StageInfo: React.FC<StageInfoProps> = ({
+export const StageInfo = ({
   stage,
   gameState,
   countdown,
   guessCountdown,
   stageAnswers,
   correctAnswer,
-}) => {
+}: StageInfoProps) => {
+  const [isAnswerShown, setIsAnswerShown] = useState<boolean>(false);
+
   return (
     <Card>
       <CardHeader>
         <Heading size="md">Stage {stage}</Heading>
       </CardHeader>
-      <CardBody>
+      <CardBody display="flex" flexDir="column" gap={4}>
         {gameState === 'idle' && <Text>Waiting for game to start...</Text>}
         {gameState === 'waiting' && <Text>WAIT: {countdown}s</Text>}
         {gameState === 'guessing' && <Text>GUESS: {guessCountdown}s</Text>}
@@ -44,7 +48,13 @@ const StageInfo: React.FC<StageInfoProps> = ({
             <OrderedList>
               {stageAnswers.map((answer) => (
                 <ListItem key={answer}>
-                  <Text fontWeight={answer === correctAnswer ? 800 : undefined}>
+                  <Text
+                    fontWeight={
+                      isAnswerShown && answer === correctAnswer
+                        ? 800
+                        : undefined
+                    }
+                  >
                     {answer}
                   </Text>
                 </ListItem>
@@ -52,9 +62,10 @@ const StageInfo: React.FC<StageInfoProps> = ({
             </OrderedList>
           </Box>
         )}
+        <Button onClick={() => setIsAnswerShown(!isAnswerShown)}>
+          {isAnswerShown ? 'Hide answer' : 'Show answer'}
+        </Button>
       </CardBody>
     </Card>
   );
 };
-
-export default StageInfo;

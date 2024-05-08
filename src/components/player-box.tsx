@@ -1,14 +1,14 @@
 import { Flex, Text } from '@chakra-ui/react';
-import Avatar from './avatar';
-import rotation from '@/animations/rotation';
+import { Avatar } from './avatar';
+import { rotation } from '@/animations/rotation';
 
 const colors = ['yellow.600', 'orange.600', 'green.600', 'blue.600'];
 
-interface PlayerBoxProps {
+type PlayerBoxProps = {
   name: string;
-}
+};
 
-const PlayerBox: React.FC<PlayerBoxProps> = ({ name }) => {
+export const PlayerBox = ({ name }: PlayerBoxProps) => {
   return (
     <Flex
       bgColor={colors[0]}
@@ -26,5 +26,3 @@ const PlayerBox: React.FC<PlayerBoxProps> = ({ name }) => {
     </Flex>
   );
 };
-
-export default PlayerBox;

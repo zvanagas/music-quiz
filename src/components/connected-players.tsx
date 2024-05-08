@@ -7,11 +7,11 @@ import {
   OrderedList,
 } from '@chakra-ui/react';
 
-interface ConnectedPlayersProps {
+type ConnectedPlayersProps = {
   players: string[];
-}
+};
 
-const ConnectedPlayers: React.FC<ConnectedPlayersProps> = ({ players }) => {
+export const ConnectedPlayers = ({ players }: ConnectedPlayersProps) => {
   return (
     <Card>
       <CardHeader>
@@ -27,5 +27,3 @@ const ConnectedPlayers: React.FC<ConnectedPlayersProps> = ({ players }) => {
     </Card>
   );
 };
-
-export default ConnectedPlayers;

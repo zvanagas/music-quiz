@@ -1,11 +1,11 @@
 import { Flex, Text } from '@chakra-ui/react';
-import PlayerBox from './player-box';
+import { PlayerBox } from './player-box';
 
-interface PlayersWaitingProps {
+type PlayersWaitingProps = {
   players: string[];
-}
+};
 
-const PlayersWaiting: React.FC<PlayersWaitingProps> = ({ players }) => {
+export const PlayersWaiting = ({ players }: PlayersWaitingProps) => {
   return (
     <Flex
       flexDirection="column"
@@ -25,5 +25,3 @@ const PlayersWaiting: React.FC<PlayersWaitingProps> = ({ players }) => {
     </Flex>
   );
 };
-
-export default PlayersWaiting;

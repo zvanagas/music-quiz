@@ -1,19 +1,19 @@
-import { PlayerData } from '@/interfaces/events';
+import { PlayerData } from '@/types/events';
 import { Flex, Text } from '@chakra-ui/react';
-import LeaderboardRow from './leaderboard-row';
-import appear from '@/animations/appear';
+import { LeaderboardRow } from './leaderboard-row';
+import { appear } from '@/animations/appear';
 
-interface LeaderboardProps {
+type LeaderboardProps = {
   scores: PlayerData[];
   playerName: string;
   withReveal?: boolean;
-}
+};
 
-const Leaderboard: React.FC<LeaderboardProps> = ({
+export const Leaderboard = ({
   scores,
   playerName,
   withReveal,
-}) => {
+}: LeaderboardProps) => {
   const maximumDelay = scores.length * 2000;
   const leaderboardSx = (index: number) => ({
     animation: `${appear} 3s normal forwards`,
@@ -39,5 +39,3 @@ const Leaderboard: React.FC<LeaderboardProps> = ({
     </Flex>
   );
 };
-
-export default Leaderboard;

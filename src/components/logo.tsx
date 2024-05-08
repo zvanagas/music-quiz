@@ -1,10 +1,10 @@
-import rotation from '@/animations/rotation';
+import { rotation } from '@/animations/rotation';
 import { Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 const colors = ['yellow.600', 'orange.600', 'green.600', 'blue.600'];
 
-const Logo = () => {
+export const Logo = () => {
   const [color, setColor] = useState<string>(colors[0]);
 
   useEffect(() => {
@@ -33,5 +33,3 @@ const Logo = () => {
     </Flex>
   );
 };
-
-export default Logo;

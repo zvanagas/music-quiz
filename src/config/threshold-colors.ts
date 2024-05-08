@@ -1,4 +1,4 @@
-const thresholdColors: [number, string][] = [
+export const thresholdColors: [number, string][] = [
   [130, 'gray.400'],
   [135, 'red.400'],
   [140, 'orange.400'],
@@ -11,5 +11,3 @@ const thresholdColors: [number, string][] = [
   [175, 'pink.400'],
   [180, 'green.700'],
 ];
-
-export default thresholdColors;

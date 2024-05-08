@@ -1,6 +1,6 @@
 import { keyframes } from '@chakra-ui/react';
 
-const rotation = keyframes`
+export const rotation = keyframes`
 0% {
   transform: rotate(0);
 }
@@ -14,5 +14,3 @@ const rotation = keyframes`
   transform: rotate(0);
 }
 `;
-
-export default rotation;

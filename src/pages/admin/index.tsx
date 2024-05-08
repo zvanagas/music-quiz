@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import SocketProvider from '@/contexts/socket-provider';
-import { useSessionStorage } from '@/hooks/use-session-storage';
-import Admin from '@/components/admin';
+import { SocketProvider } from '@/contexts/socket-provider';
+import { useSessionStorage } from '@/hooks/use-session-storage.hook';
+import { Admin } from '@/components/admin';
 
 const adminId = 'ADMIN';
 

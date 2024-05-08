@@ -1,11 +1,11 @@
 import { Flex } from '@chakra-ui/react';
 import { getColorName } from '@/utils';
 
-interface AvatarProps {
+type AvatarProps = {
   name: string;
-}
+};
 
-const Avatar: React.FC<AvatarProps> = ({ name }) => {
+export const Avatar = ({ name }: AvatarProps) => {
   const upperCasedName = name.toUpperCase();
   const code = upperCasedName.charCodeAt(0) + upperCasedName.charCodeAt(1);
 
@@ -22,5 +22,3 @@ const Avatar: React.FC<AvatarProps> = ({ name }) => {
     </Flex>
   );
 };
-
-export default Avatar;

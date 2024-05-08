@@ -1,6 +1,6 @@
-import { useSessionStorage } from '@/hooks/use-session-storage';
-import SocketProvider from '@/contexts/socket-provider';
-import Play from '@/components/play';
+import { useSessionStorage } from '@/hooks/use-session-storage.hook';
+import { SocketProvider } from '@/contexts/socket-provider';
+import { Play } from '@/components/play';
 
 const PlayWithSocket = () => {
   const [id] = useSessionStorage('id');
