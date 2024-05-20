@@ -11,6 +11,7 @@ export default function SocketHandler(
   res: NextApiResponseWithSocket
 ) {
   if (res.socket?.server.io) {
+    // eslint-disable-next-line no-console
     console.log('Already set up');
     res.end();
     return;

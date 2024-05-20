@@ -115,9 +115,10 @@ export const useAdmin = () => {
           name: data.name,
           score: (playerList[playerIndex]?.score ?? 0) + pointsToAdd,
           plusPoints: pointsToAdd,
-          streak: isCorrectAnswer ? playerList[playerIndex].streak + 1 : 0,
+          streak: isCorrectAnswer
+            ? (playerList[playerIndex]?.streak ?? 0) + 1
+            : 0,
         };
-        console.log(playerList[playerIndex].streak);
 
         return playerList;
       });
