@@ -22,7 +22,7 @@ export const GuessesLog = ({ guesses }: GuessesLogProps) => {
         <UnorderedList>
           {guesses.map((it) => (
             <ListItem key={`${it.name}-${it.answer}`}>
-              {it.name} guessed {it.answer} (Time {it.time})
+              {it.name} guessed {it.answer} (Points {it.points})
             </ListItem>
           ))}
         </UnorderedList>

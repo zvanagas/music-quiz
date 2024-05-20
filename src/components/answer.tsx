@@ -1,3 +1,4 @@
+import { SONG_NAME_LIMIT } from '@/config/constants';
 import { SelectedAnswer } from '@/types/events';
 import { GameStates } from '@/types/game-states';
 import { Button, Divider, ThemingProps, Text } from '@chakra-ui/react';
@@ -24,7 +25,12 @@ export const Answer = ({
   gameState,
   onClick,
 }: AnswerProps) => {
-  const [artist, song] = fullSongName.split(' - ');
+  const [artist, ...song] = fullSongName.split(' - ');
+  const joinedSong = song.join(' - ');
+  const songName =
+    joinedSong.length >= SONG_NAME_LIMIT
+      ? joinedSong.substring(0, SONG_NAME_LIMIT) + '...'
+      : joinedSong;
   const opacity =
     (selectedAnswer && selectedAnswer.answer !== fullSongName) ||
     gameState !== 'guessing'
@@ -34,6 +40,7 @@ export const Answer = ({
     <Button
       size="xl"
       display="flex"
+      overflow="hidden"
       flexDirection="column"
       _disabled={{ opacity }}
       isDisabled={!!selectedAnswer || gameState !== 'guessing'}
@@ -41,9 +48,9 @@ export const Answer = ({
       onClick={() => onClick(fullSongName, index)}
     >
       <Text px={2}>{artist}</Text>
-      <Divider bgColor={'black'} my={2} height={1} />
-      <Text px={2} wordBreak={'break-word'}>
-        {song}
+      <Divider bgColor="black" my={2} height={1} />
+      <Text px={2} wordBreak="break-word">
+        {songName}
       </Text>
     </Button>
   );

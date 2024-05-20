@@ -38,7 +38,9 @@ export const StageInfo = ({
         <Heading size="md">Stage {stage}</Heading>
       </CardHeader>
       <CardBody display="flex" flexDir="column" gap={4}>
-        {gameState === 'idle' && <Text>Waiting for game to start...</Text>}
+        {['idle', 'loading'].includes(gameState) && (
+          <Text>Waiting for game to start...</Text>
+        )}
         {gameState === 'waiting' && <Text>WAIT: {countdown}s</Text>}
         {gameState === 'guessing' && <Text>GUESS: {guessCountdown}s</Text>}
         {['waiting', 'guessing'].includes(gameState) && (

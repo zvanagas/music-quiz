@@ -33,6 +33,7 @@ export const Leaderboard = ({
           place={index + 1}
           name={player.name}
           score={player.score}
+          plusPoints={player.plusPoints}
           isYours={playerName === player.name}
         />
       ))}

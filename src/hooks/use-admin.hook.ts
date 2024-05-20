@@ -2,8 +2,8 @@ import {
   STAGES,
   WAIT_TIME,
   GUESS_TIME,
-  POINTS_PER_SECOND,
   VICTORY_SONG,
+  VOLUME_POINT,
 } from '@/config/constants';
 import { songs } from '@/config/songs';
 import { useSocket } from '@/contexts/socket-provider';
@@ -67,6 +67,7 @@ export const useAdmin = () => {
     previousStageSong?.pause();
 
     socket?.emit(Events.Guess);
+    // Logic to start song at random time
     // const rand = Math.floor(
     //   Math.random() * Math.floor(currentStageSong.duration - 20)
     // );
@@ -87,10 +88,10 @@ export const useAdmin = () => {
       return;
     }
 
-    if (previousStageSong.volume >= 0.125) {
-      previousStageSong.volume = previousStageSong.volume - 0.125;
+    if (previousStageSong.volume >= VOLUME_POINT) {
+      previousStageSong.volume = previousStageSong.volume - VOLUME_POINT;
     }
-    if (previousStageSong.volume < 0.125) {
+    if (previousStageSong.volume < VOLUME_POINT) {
       previousStageSong.pause();
     }
   }, [countdown, previousStageSong]);
@@ -99,12 +100,9 @@ export const useAdmin = () => {
     (data: PlayerGuess) => {
       setGuessLog((prevLog) => [data, ...prevLog]);
 
-      if (
-        !answersData[currentStage - 1] ||
-        answersData[currentStage - 1].correctAnswer !== data.answer
-      ) {
-        return;
-      }
+      const isCorrectAnswer =
+        answersData[currentStage - 1] &&
+        answersData[currentStage - 1].correctAnswer === data.answer;
 
       setLeaderboard((prevPlayers) => {
         let playerIndex = prevPlayers.findIndex((it) => it.name === data.name);
@@ -112,12 +110,14 @@ export const useAdmin = () => {
           playerIndex = prevPlayers.length;
         }
         const playerList = [...prevPlayers];
+        const pointsToAdd = isCorrectAnswer ? data.points : 0;
         playerList[playerIndex] = {
           name: data.name,
-          score:
-            (playerList[playerIndex]?.score ?? 0) +
-            data.time * POINTS_PER_SECOND,
+          score: (playerList[playerIndex]?.score ?? 0) + pointsToAdd,
+          plusPoints: pointsToAdd,
+          streak: isCorrectAnswer ? playerList[playerIndex].streak + 1 : 0,
         };
+        console.log(playerList[playerIndex].streak);
 
         return playerList;
       });
@@ -149,19 +149,21 @@ export const useAdmin = () => {
 
   const startGame = useCallback(
     async (type: 'default' | 'spotify') => {
-      let filteredSongs: Song[] = [];
+      setGameState('loading');
+      let currentSongs: Song[] = [];
       if (type === 'default') {
-        filteredSongs =
+        currentSongs =
           category === 'all'
             ? songs
             : songs.filter(({ tag }) => category === tag);
       } else if (type === 'spotify') {
-        filteredSongs = await (
+        currentSongs = await (
           await fetch(`/api/spotify?id=${playlistId}`)
         ).json();
       }
       const { answers, songList } = await loadSongs(
-        filteredSongs,
+        currentSongs,
+        STAGES,
         type === 'spotify'
       );
       if (!victorySong) {
@@ -171,7 +173,12 @@ export const useAdmin = () => {
       setLoadedSongs(songList);
       setAnswersData(answers);
       setCurrentStage((prevStage) => prevStage + 1);
-      const currLeaderboard = players.map((name) => ({ name, score: 0 }));
+      const currLeaderboard = players.map((name) => ({
+        name,
+        score: 0,
+        plusPoints: 0,
+        streak: 0,
+      }));
       setLeaderboard(currLeaderboard);
       socket?.emit(Events.Start, {
         answers: answers[0].answers,

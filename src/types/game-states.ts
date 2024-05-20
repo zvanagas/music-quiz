@@ -1,1 +1,6 @@
-export type GameStates = 'idle' | 'waiting' | 'guessing' | 'finished';
+export type GameStates =
+  | 'idle'
+  | 'loading'
+  | 'waiting'
+  | 'guessing'
+  | 'finished';

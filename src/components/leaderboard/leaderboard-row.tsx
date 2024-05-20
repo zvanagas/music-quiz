@@ -5,6 +5,7 @@ type LeaderboardRowProps = CardProps & {
   place: number;
   name: string;
   score: number;
+  plusPoints: number;
   isYours: boolean;
 };
 
@@ -15,6 +16,7 @@ export const LeaderboardRow = ({
   name,
   score,
   isYours,
+  plusPoints,
   sx,
 }: LeaderboardRowProps) => {
   return (
@@ -39,7 +41,7 @@ export const LeaderboardRow = ({
           </HStack>
         </HStack>
         <Text fontSize="l" fontWeight="bold">
-          {score}
+          {score} {plusPoints > 0 && ` (+${plusPoints})`}
         </Text>
       </CardBody>
     </Card>

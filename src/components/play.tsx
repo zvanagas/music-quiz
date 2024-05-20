@@ -3,9 +3,9 @@ import { Box, Flex, Grid, Text } from '@chakra-ui/react';
 import { Answer } from '@/components/answer';
 import { Leaderboard } from '@/components/leaderboard';
 import { PlayersWaiting } from '@/components/players-waiting';
-import { STAGES } from '@/config/constants';
 import { Confetti } from '@/components/confetti';
 import { usePlay } from '@/hooks/use-play.hook';
+import { STAGES } from '@/config/constants';
 
 export const Play = () => {
   const {
@@ -57,7 +57,7 @@ export const Play = () => {
       width="full"
       height="full"
     >
-      <Grid gridTemplateColumns={'1fr 1fr'} gap={4}>
+      <Grid gridTemplateColumns="1fr 1fr" gap={4}>
         {answers.map((song, i) => (
           <Answer
             key={song}
@@ -87,12 +87,12 @@ export const Play = () => {
           </Text>
         )}
         {gameState !== 'finished' && (
-          <Text as="h2" fontSize={'xl'}>
+          <Text as="h2" fontSize="xl">
             {currCountdown || 'Waiting...'}
           </Text>
         )}
         {['waiting', 'finished'].includes(gameState) && prevRoundAnswer && (
-          <Box px={2} textAlign={'center'}>
+          <Box px={2} textAlign="center">
             <Text as="span" fontWeight={800}>
               Answer:
             </Text>{' '}

@@ -5,9 +5,7 @@ import {
   Button,
   Card,
   CardBody,
-  CardHeader,
   Flex,
-  Heading,
   Input,
   Select,
   Tab,
@@ -64,7 +62,7 @@ export const Admin = () => {
                 mt={4}
                 colorScheme="green"
                 onClick={() => startGame('default')}
-                isDisabled={gameState !== 'idle'}
+                isDisabled={gameState === 'loading'}
               >
                 Start game!
               </Button>
@@ -77,6 +75,7 @@ export const Admin = () => {
               <Button
                 mt={4}
                 colorScheme="green"
+                isDisabled={gameState === 'loading'}
                 onClick={() => startGame('spotify')}
               >
                 Start game!
@@ -96,7 +95,7 @@ export const Admin = () => {
       flexWrap="wrap"
       justifyContent="center"
     >
-      {gameState === 'idle' && renderStartGameCards()}
+      {['idle', 'loading'].includes(gameState) && renderStartGameCards()}
       {gameState !== 'finished' && (
         <StageInfo
           stage={currentStage}

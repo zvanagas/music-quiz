@@ -17,7 +17,7 @@ export type PlayerGuess = {
   index: number;
   answer: string;
   name: string;
-  time: number;
+  points: number;
 };
 
 export type AnswersData = {
@@ -28,6 +28,8 @@ export type AnswersData = {
 export type PlayerData = {
   name: string;
   score: number;
+  plusPoints: number;
+  streak: number;
 };
 
 export type Results = {
@@ -38,7 +40,7 @@ export type Results = {
 export type SelectedAnswer = {
   index: number;
   answer: string;
-  time: number;
+  points: number;
 };
 
 export type SocketEvents = {

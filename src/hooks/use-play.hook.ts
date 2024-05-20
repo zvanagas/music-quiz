@@ -22,6 +22,7 @@ export const usePlay = () => {
   const [gameState, setGameState] = useState<GameStates>('idle');
   const [prevRoundAnswer, setPrevRoundAnswer] = useState('');
   const [players, setPlayers] = useState<string[]>([]);
+  const [guessingStartTime, setGuessingStartTime] = useState<number>(0);
   const [leaderboard, setLeaderboard] = useState<PlayerData[]>([]);
   const { countdown, startCountdown } = useCountdown(() =>
     setSelectedAnswer(undefined)
@@ -70,12 +71,14 @@ export const usePlay = () => {
   const onGuess = useCallback(() => {
     setGameState('guessing');
     startGuessCountdown(GUESS_TIME);
+    setGuessingStartTime(Date.now());
   }, [startGuessCountdown]);
 
   const onResults = useCallback(({ correctAnswer, scores }: Results) => {
     setLeaderboard(scores);
     setPrevRoundAnswer(correctAnswer);
     setGameState('finished');
+    setGuessingStartTime(0);
   }, []);
 
   const onReset = useCallback(() => {
@@ -110,10 +113,13 @@ export const usePlay = () => {
     if (selectedAnswer) {
       return;
     }
+    const points = Math.ceil(
+      (guessingStartTime - Date.now() + GUESS_TIME * 1000) / 10
+    );
     const guessAnswer = {
       index,
       answer,
-      time: guessCountdown ?? 0,
+      points: points > 0 ? points : 0,
     };
     setSelectedAnswer(guessAnswer);
     socket?.emit(Events.PlayerGuess, { ...guessAnswer, name: id });
