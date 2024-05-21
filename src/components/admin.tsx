@@ -18,6 +18,7 @@ import { GuessesLog } from '@/components/guesses-log';
 import { ConnectedPlayers } from '@/components/connected-players';
 import { StageInfo } from '@/components/stage-info';
 import { useAdmin } from '@/hooks/use-admin.hook';
+import { Config } from './config';
 
 export const Admin = () => {
   const {
@@ -36,6 +37,7 @@ export const Admin = () => {
     currentStageAnswers,
     playlistId,
     setPlaylistId,
+    stages,
   } = useAdmin();
 
   const renderStartGameCards = () => (
@@ -96,8 +98,10 @@ export const Admin = () => {
       justifyContent="center"
     >
       {['idle', 'loading'].includes(gameState) && renderStartGameCards()}
+      {['idle', 'loading'].includes(gameState) && <Config stages={stages} />}
       {gameState !== 'finished' && (
         <StageInfo
+          stages={stages}
           stage={currentStage}
           gameState={gameState}
           countdown={countdown}

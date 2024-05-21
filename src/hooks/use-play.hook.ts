@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import { useState, useEffect, useCallback } from 'react';
 import { useCountdown } from './use-countdown.hook';
 import { useSessionStorage } from './use-session-storage.hook';
+import { useConfig } from './use-config.hook';
 
 export const usePlay = () => {
   const [id] = useSessionStorage('id');
@@ -31,6 +32,7 @@ export const usePlay = () => {
     useCountdown();
   const socket = useSocket();
   const router = useRouter();
+  const { config } = useConfig();
 
   useEffect(() => {
     if (!id) {
@@ -137,5 +139,6 @@ export const usePlay = () => {
     currentStage,
     prevRoundAnswer,
     leaderboard,
+    stages: config.stages,
   };
 };

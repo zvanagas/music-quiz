@@ -5,7 +5,6 @@ import { Leaderboard } from '@/components/leaderboard';
 import { PlayersWaiting } from '@/components/players-waiting';
 import { Confetti } from '@/components/confetti';
 import { usePlay } from '@/hooks/use-play.hook';
-import { STAGES } from '@/config/constants';
 
 export const Play = () => {
   const {
@@ -20,6 +19,7 @@ export const Play = () => {
     gameState,
     prevRoundAnswer,
     leaderboard,
+    stages,
   } = usePlay();
 
   const currCountdown = useMemo(() => {
@@ -83,7 +83,7 @@ export const Play = () => {
       >
         {gameState !== 'finished' && (
           <Text fontSize="4xl">
-            Stage: {currentStage}/{STAGES}
+            Stage: {currentStage}/{stages}
           </Text>
         )}
         {gameState !== 'finished' && (

@@ -1,5 +1,4 @@
 import {
-  STAGES,
   WAIT_TIME,
   GUESS_TIME,
   VICTORY_SONG,
@@ -14,6 +13,7 @@ import { loadSongs, loadSong } from '@/utils';
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useCountdown } from './use-countdown.hook';
 import { Song } from '@/types/song';
+import { useConfig } from './use-config.hook';
 
 export const useAdmin = () => {
   const [loadedSongs, setLoadedSongs] = useState<HTMLAudioElement[]>([]);
@@ -32,9 +32,10 @@ export const useAdmin = () => {
     () => loadedSongs[currentStage - 2],
     [loadedSongs, currentStage]
   );
+  const { config } = useConfig();
 
   const onGuessCountdownFinish = () => {
-    if (currentStage === STAGES) {
+    if (currentStage === config?.stages) {
       setGameState('finished');
       socket?.emit(Events.Results, {
         correctAnswer: answersData[currentStage - 1].correctAnswer,
@@ -164,7 +165,7 @@ export const useAdmin = () => {
       }
       const { answers, songList } = await loadSongs(
         currentSongs,
-        STAGES,
+        config.stages,
         type === 'spotify'
       );
       if (!victorySong) {
@@ -219,5 +220,6 @@ export const useAdmin = () => {
     currentStageAnswers,
     playlistId,
     setPlaylistId,
+    stages: config.stages,
   };
 };

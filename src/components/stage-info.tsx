@@ -20,6 +20,7 @@ type StageInfoProps = {
   guessCountdown: number;
   stageAnswers: string[];
   correctAnswer: string;
+  stages: number;
 };
 
 export const StageInfo = ({
@@ -29,13 +30,16 @@ export const StageInfo = ({
   guessCountdown,
   stageAnswers,
   correctAnswer,
+  stages,
 }: StageInfoProps) => {
   const [isAnswerShown, setIsAnswerShown] = useState<boolean>(false);
 
   return (
     <Card>
       <CardHeader>
-        <Heading size="md">Stage {stage}</Heading>
+        <Heading size="md">
+          Stage {stage}/{stages}
+        </Heading>
       </CardHeader>
       <CardBody display="flex" flexDir="column" gap={4}>
         {['idle', 'loading'].includes(gameState) && (
@@ -64,9 +68,11 @@ export const StageInfo = ({
             </OrderedList>
           </Box>
         )}
-        <Button onClick={() => setIsAnswerShown(!isAnswerShown)}>
-          {isAnswerShown ? 'Hide answer' : 'Show answer'}
-        </Button>
+        {!['idle', 'loading'].includes(gameState) && (
+          <Button onClick={() => setIsAnswerShown(!isAnswerShown)}>
+            {isAnswerShown ? 'Hide answer' : 'Show answer'}
+          </Button>
+        )}
       </CardBody>
     </Card>
   );
