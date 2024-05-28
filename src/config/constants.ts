@@ -5,3 +5,4 @@ export const POINTS_PER_SECOND = 100;
 export const VICTORY_SONG = 'victory.mp3';
 export const VOLUME_POINT = 0.125;
 export const SONG_NAME_LIMIT = 40;
+export const STREAK_THRESHOLDS = [3, 5, 8, 10];

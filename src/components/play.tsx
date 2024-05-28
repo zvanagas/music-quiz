@@ -5,6 +5,7 @@ import { Leaderboard } from '@/components/leaderboard';
 import { PlayersWaiting } from '@/components/players-waiting';
 import { Confetti } from '@/components/confetti';
 import { usePlay } from '@/hooks/use-play.hook';
+import { STREAK_THRESHOLDS } from '@/config/constants';
 
 export const Play = () => {
   const {
@@ -72,6 +73,32 @@ export const Play = () => {
     </Flex>
   );
 
+  const renderAnswerData = () => {
+    const streak = leaderboard.find((it) => it.name === id)?.streak;
+
+    return (
+      <Box px={2} textAlign="center">
+        <Flex gap={1}>
+          <Text as="span" fontWeight={800}>
+            Answer:
+          </Text>
+          <Text>
+            {prevRoundAnswer}{' '}
+            {!!selectedAnswer?.answer &&
+              `(${
+                prevRoundAnswer === selectedAnswer?.answer
+                  ? 'CORRECT'
+                  : 'INCORRECT'
+              })`}
+          </Text>
+        </Flex>
+        {STREAK_THRESHOLDS.includes(streak ?? 0) && (
+          <Text fontWeight={800}>{streak} in a row!</Text>
+        )}
+      </Box>
+    );
+  };
+
   const renderContent = () => {
     return (
       <Flex
@@ -91,22 +118,9 @@ export const Play = () => {
             {currCountdown || 'Waiting...'}
           </Text>
         )}
-        {['waiting', 'finished'].includes(gameState) && prevRoundAnswer && (
-          <Box px={2} textAlign="center">
-            <Text as="span" fontWeight={800}>
-              Answer:
-            </Text>{' '}
-            <Text>
-              {prevRoundAnswer}{' '}
-              {!!selectedAnswer?.answer &&
-                `(${
-                  prevRoundAnswer === selectedAnswer?.answer
-                    ? 'CORRECT'
-                    : 'INCORRECT'
-                })`}
-            </Text>
-          </Box>
-        )}
+        {['waiting', 'finished'].includes(gameState) &&
+          prevRoundAnswer &&
+          renderAnswerData()}
         {leaderboard.length > 0 &&
           ['waiting', 'finished'].includes(gameState) && (
             <Leaderboard
