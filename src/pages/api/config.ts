@@ -19,13 +19,35 @@ export default async function handler(
 
       stages = Number(stagesCount.value);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.warn(error);
     }
 
-    return res.status(200).json({
+    res.status(200).json({
       stages,
     });
+    return;
+  } else if (req.method === 'PATCH') {
+    const body = JSON.parse(req.body);
+
+    if (!body.stages) {
+      res.status(400).end();
+      return;
+    }
+
+    try {
+      await db
+        .update(config)
+        .set({ value: body.stages })
+        .where(eq(config.name, 'stages'));
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.warn(error);
+    }
+
+    res.status(204).end();
+    return;
   }
 
-  return res.status(405).end();
+  res.status(405).end();
 }

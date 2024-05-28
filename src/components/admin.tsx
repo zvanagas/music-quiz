@@ -38,6 +38,7 @@ export const Admin = () => {
     playlistId,
     setPlaylistId,
     stages,
+    handleStagesUpdate,
   } = useAdmin();
 
   const renderStartGameCards = () => (
@@ -98,7 +99,9 @@ export const Admin = () => {
       justifyContent="center"
     >
       {['idle', 'loading'].includes(gameState) && renderStartGameCards()}
-      {['idle', 'loading'].includes(gameState) && <Config stages={stages} />}
+      {['idle', 'loading'].includes(gameState) && (
+        <Config stages={stages} onStagesUpdate={handleStagesUpdate} />
+      )}
       {gameState !== 'finished' && (
         <StageInfo
           stages={stages}

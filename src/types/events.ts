@@ -51,5 +51,6 @@ export type SocketEvents = {
   [Events.PlayerGuess]: (data: PlayerGuess) => void;
   [Events.Results]: (data: Results) => void;
   [Events.Players]: (data: string[]) => void;
+  [Events.UpdateStages]: (stages: number) => void;
   [Events.Reset]: () => void;
 };

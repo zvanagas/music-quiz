@@ -32,7 +32,7 @@ export const usePlay = () => {
     useCountdown();
   const socket = useSocket();
   const router = useRouter();
-  const { config } = useConfig();
+  const { config, setConfig } = useConfig();
 
   useEffect(() => {
     if (!id) {
@@ -92,6 +92,11 @@ export const usePlay = () => {
     setGameState('idle');
   }, []);
 
+  const onConfigUpdate = useCallback(
+    (stages: number) => setConfig({ stages }),
+    [setConfig]
+  );
+
   useEffect(() => {
     if (socket) {
       socket.on(Events.Start, onStartGame);
@@ -99,6 +104,7 @@ export const usePlay = () => {
       socket.on(Events.Guess, onGuess);
       socket.on(Events.Results, onResults);
       socket.on(Events.Players, setPlayers);
+      socket.on(Events.UpdateStages, onConfigUpdate);
       socket.on(Events.Reset, onReset);
     }
 
@@ -107,9 +113,18 @@ export const usePlay = () => {
       socket?.off(Events.Wait, onWait);
       socket?.off(Events.Guess, onGuess);
       socket?.off(Events.Results, onResults);
+      socket?.off(Events.UpdateStages, onConfigUpdate);
       socket?.off(Events.Players, setPlayers);
     };
-  }, [onGuess, onReset, onResults, onStartGame, onWait, socket]);
+  }, [
+    onConfigUpdate,
+    onGuess,
+    onReset,
+    onResults,
+    onStartGame,
+    onWait,
+    socket,
+  ]);
 
   const guess = (answer: string, index: number) => {
     if (selectedAnswer) {

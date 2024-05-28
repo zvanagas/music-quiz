@@ -52,6 +52,9 @@ export default function SocketHandler(
     socket.on(Events.Results, (msg) =>
       socket.to(Rooms.Players).emit(Events.Results, msg)
     );
+    socket.on(Events.UpdateStages, (msg) =>
+      socket.to(Rooms.Players).emit(Events.UpdateStages, msg)
+    );
     socket.on(Events.Reset, () => socket.to(Rooms.Players).emit(Events.Reset));
 
     socket.on('disconnect', () => {

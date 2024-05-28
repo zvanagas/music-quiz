@@ -7,4 +7,5 @@ export enum Events {
   Results = 'results',
   Players = 'players',
   Reset = 'reset',
+  UpdateStages = 'updateStages',
 }

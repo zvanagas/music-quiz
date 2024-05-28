@@ -14,6 +14,7 @@ import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useCountdown } from './use-countdown.hook';
 import { Song } from '@/types/song';
 import { useConfig } from './use-config.hook';
+import { endpoints } from '@/config/endpoints';
 
 export const useAdmin = () => {
   const [loadedSongs, setLoadedSongs] = useState<HTMLAudioElement[]>([]);
@@ -32,7 +33,7 @@ export const useAdmin = () => {
     () => loadedSongs[currentStage - 2],
     [loadedSongs, currentStage]
   );
-  const { config } = useConfig();
+  const { config, updateStages } = useConfig();
 
   const onGuessCountdownFinish = () => {
     if (currentStage === config?.stages) {
@@ -160,7 +161,7 @@ export const useAdmin = () => {
             : songs.filter(({ tag }) => category === tag);
       } else if (type === 'spotify') {
         currentSongs = await (
-          await fetch(`/api/spotify?id=${playlistId}`)
+          await fetch(`${endpoints.spotify}?id=${playlistId}`)
         ).json();
       }
       const { answers, songList } = await loadSongs(
@@ -190,10 +191,18 @@ export const useAdmin = () => {
       startCountdown(WAIT_TIME);
       setGameState('waiting');
     },
-    [victorySong, players, socket, startCountdown, category, playlistId]
+    [
+      config.stages,
+      victorySong,
+      players,
+      socket,
+      startCountdown,
+      category,
+      playlistId,
+    ]
   );
 
-  const resetGame = () => {
+  const resetGame = useCallback(() => {
     setGuessLog([]);
     setLoadedSongs([]);
     setAnswersData([]);
@@ -202,7 +211,16 @@ export const useAdmin = () => {
     victorySong?.pause();
     setGameState('idle');
     socket?.emit(Events.Reset);
-  };
+  }, [socket, victorySong]);
+
+  const handleStagesUpdate = useCallback(
+    (stages: number) => {
+      updateStages(stages).then(() =>
+        socket?.emit(Events.UpdateStages, stages)
+      );
+    },
+    [socket, updateStages]
+  );
 
   return {
     startGame,
@@ -221,5 +239,6 @@ export const useAdmin = () => {
     playlistId,
     setPlaylistId,
     stages: config.stages,
+    handleStagesUpdate,
   };
 };
