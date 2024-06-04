@@ -164,6 +164,12 @@ export const useAdmin = () => {
           await fetch(`${endpoints.spotify}?id=${playlistId}`)
         ).json();
       }
+
+      if (!currentSongs.length) {
+        setGameState('idle');
+        return;
+      }
+
       const { answers, songList } = await loadSongs(
         currentSongs,
         config.stages,

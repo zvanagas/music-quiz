@@ -78,20 +78,18 @@ export const Play = () => {
 
     return (
       <Box px={2} textAlign="center">
-        <Flex gap={1}>
+        <Text>
           <Text as="span" fontWeight={800}>
             Answer:
-          </Text>
-          <Text>
-            {prevRoundAnswer}{' '}
-            {!!selectedAnswer?.answer &&
-              `(${
-                prevRoundAnswer === selectedAnswer?.answer
-                  ? 'CORRECT'
-                  : 'INCORRECT'
-              })`}
-          </Text>
-        </Flex>
+          </Text>{' '}
+          {prevRoundAnswer}{' '}
+          {!!selectedAnswer?.answer &&
+            `(${
+              prevRoundAnswer === selectedAnswer?.answer
+                ? 'CORRECT'
+                : 'INCORRECT'
+            })`}
+        </Text>
         {STREAK_THRESHOLDS.includes(streak ?? 0) && (
           <Text fontWeight={800}>{streak} in a row!</Text>
         )}
@@ -114,7 +112,7 @@ export const Play = () => {
           </Text>
         )}
         {gameState !== 'finished' && (
-          <Text as="h2" fontSize="xl">
+          <Text as="h2" fontSize="xl" textAlign="center">
             {currCountdown || 'Waiting...'}
           </Text>
         )}
@@ -126,7 +124,7 @@ export const Play = () => {
             <Leaderboard
               playerName={id}
               scores={leaderboard}
-              withReveal={gameState === 'finished'}
+              isGameFinished={gameState === 'finished'}
             />
           )}
         {gameState === 'guessing' && renderGuessContent()}

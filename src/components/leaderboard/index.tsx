@@ -6,13 +6,13 @@ import { appear } from '@/animations/appear';
 type LeaderboardProps = {
   scores: PlayerData[];
   playerName: string;
-  withReveal?: boolean;
+  isGameFinished?: boolean;
 };
 
 export const Leaderboard = ({
   scores,
   playerName,
-  withReveal,
+  isGameFinished,
 }: LeaderboardProps) => {
   const maximumDelay = scores.length * 2000;
   const leaderboardSx = (index: number) => ({
@@ -24,11 +24,11 @@ export const Leaderboard = ({
   return (
     <Flex flexDirection="column" alignSelf="center" gap={2} width="90%">
       <Text textAlign="center" fontWeight="extrabold" fontSize="2xl">
-        Results
+        {isGameFinished ? 'Final Results' : 'Results'}
       </Text>
       {scores.map((player, index) => (
         <LeaderboardRow
-          sx={withReveal ? leaderboardSx(index) : undefined}
+          sx={isGameFinished ? leaderboardSx(index) : undefined}
           key={player.name}
           place={index + 1}
           name={player.name}
