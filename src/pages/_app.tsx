@@ -3,15 +3,18 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import './styles.css';
+import { ToastProvider } from '@/contexts/toast-provider';
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
-        <title>Music Quiz</title>
+        <title>MuziQ</title>
       </Head>
       <ChakraProvider theme={theme}>
-        <Component {...pageProps} />
+        <ToastProvider>
+          <Component {...pageProps} />
+        </ToastProvider>
       </ChakraProvider>
     </>
   );

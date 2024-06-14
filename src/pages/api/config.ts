@@ -1,6 +1,6 @@
 import { STAGES } from '@/config/constants';
-import { db } from '@/lib/drizzle';
-import { config } from '@/lib/schema';
+import { db } from '@/lib/db/drizzle';
+import { config } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
 import { NextApiRequest, NextApiResponse } from 'next';
 

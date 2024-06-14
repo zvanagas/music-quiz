@@ -16,7 +16,7 @@ import { useSessionStorage } from './use-session-storage.hook';
 import { useConfig } from './use-config.hook';
 
 export const usePlay = () => {
-  const [id] = useSessionStorage('id');
+  const [user] = useSessionStorage('user');
   const [answers, setAnswers] = useState<string[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer>();
   const [currentStage, setCurrentStage] = useState(0);
@@ -35,16 +35,16 @@ export const usePlay = () => {
   const { config, setConfig } = useConfig();
 
   useEffect(() => {
-    if (!id) {
+    if (!user) {
       router.push('/');
     }
-  }, [id, router]);
+  }, [user, router]);
 
   useEffect(() => {
-    if (id && socket) {
-      socket.emit(Events.Join, id);
+    if (user && socket) {
+      socket.emit(Events.Join, user);
     }
-  }, [socket, id]);
+  }, [socket, user]);
 
   const onStartGame = useCallback(
     ({ answers, stage, scores }: Start) => {
@@ -139,11 +139,11 @@ export const usePlay = () => {
       points: points > 0 ? points : 0,
     };
     setSelectedAnswer(guessAnswer);
-    socket?.emit(Events.PlayerGuess, { ...guessAnswer, name: id });
+    socket?.emit(Events.PlayerGuess, { ...guessAnswer, name: user });
   };
 
   return {
-    id,
+    user,
     players,
     guess,
     countdown,

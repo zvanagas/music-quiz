@@ -26,13 +26,15 @@ export default function SocketHandler(
   res.socket.server.io = io;
 
   io.on('connection', (socket) => {
-    const { id } = socket.handshake.query;
-    const room = id === 'ADMIN' ? Rooms.Admin : Rooms.Players;
+    const { id, user, type } = socket.handshake.query;
+    const adminRoom = `${id}-${Rooms.Admin}`;
+    const userRoom = `${id}-${Rooms.Players}`;
+    const room = type === 'admin' ? adminRoom : userRoom;
 
-    if (id && typeof id === 'string') {
+    if (id && typeof id === 'string' && typeof user === 'string') {
       socket.join(room);
-      if (id !== 'ADMIN') {
-        clients[socket.id] = id;
+      if (type !== 'admin') {
+        clients[socket.id] = user;
       }
     }
 
@@ -40,22 +42,20 @@ export default function SocketHandler(
       io.sockets.emit(Events.Players, Object.values(clients))
     );
     socket.on(Events.PlayerGuess, (msg) =>
-      socket.to(Rooms.Admin).emit(Events.PlayerGuess, msg)
+      socket.to(adminRoom).emit(Events.PlayerGuess, msg)
     );
     socket.on(Events.Start, (msg) =>
-      socket.to(Rooms.Players).emit(Events.Start, msg)
+      socket.to(userRoom).emit(Events.Start, msg)
     );
-    socket.on(Events.Wait, (msg) =>
-      socket.to(Rooms.Players).emit(Events.Wait, msg)
-    );
-    socket.on(Events.Guess, () => socket.to(Rooms.Players).emit(Events.Guess));
+    socket.on(Events.Wait, (msg) => socket.to(userRoom).emit(Events.Wait, msg));
+    socket.on(Events.Guess, () => socket.to(userRoom).emit(Events.Guess));
     socket.on(Events.Results, (msg) =>
-      socket.to(Rooms.Players).emit(Events.Results, msg)
+      socket.to(userRoom).emit(Events.Results, msg)
     );
     socket.on(Events.UpdateStages, (msg) =>
-      socket.to(Rooms.Players).emit(Events.UpdateStages, msg)
+      socket.to(userRoom).emit(Events.UpdateStages, msg)
     );
-    socket.on(Events.Reset, () => socket.to(Rooms.Players).emit(Events.Reset));
+    socket.on(Events.Reset, () => socket.to(userRoom).emit(Events.Reset));
 
     socket.on('disconnect', () => {
       socket.leave(room);

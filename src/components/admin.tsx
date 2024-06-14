@@ -1,19 +1,7 @@
 'use client';
 
 import { Players } from '@/components/players';
-import {
-  Button,
-  Card,
-  CardBody,
-  Flex,
-  Input,
-  Select,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-} from '@chakra-ui/react';
+import { Button, Card, CardBody, Flex, Input, Text } from '@chakra-ui/react';
 import { GuessesLog } from '@/components/guesses-log';
 import { ConnectedPlayers } from '@/components/connected-players';
 import { StageInfo } from '@/components/stage-info';
@@ -24,8 +12,6 @@ export const Admin = () => {
   const {
     startGame,
     resetGame,
-    category,
-    setCategory,
     gameState,
     players,
     guessLog,
@@ -38,54 +24,26 @@ export const Admin = () => {
     playlistId,
     setPlaylistId,
     stages,
+    roomId,
     handleStagesUpdate,
   } = useAdmin();
 
   const renderStartGameCards = () => (
     <Card>
       <CardBody>
-        <Tabs>
-          <TabList>
-            <Tab>Presets</Tab>
-            <Tab>Spotify</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel display="flex" flexDir="column">
-              <Select
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              >
-                <option value="all">All</option>
-                <option value="mix">Mix</option>
-                <option value="2000">2000</option>
-                <option value="2021">2021</option>
-                <option value="2023">2023</option>
-              </Select>
-              <Button
-                mt={4}
-                colorScheme="green"
-                onClick={() => startGame('default')}
-                isDisabled={gameState === 'loading'}
-              >
-                Start game!
-              </Button>
-            </TabPanel>
-            <TabPanel display="flex" flexDir="column">
-              <Input
-                value={playlistId}
-                onChange={({ target }) => setPlaylistId(target.value)}
-              />
-              <Button
-                mt={4}
-                colorScheme="green"
-                isDisabled={gameState === 'loading'}
-                onClick={() => startGame('spotify')}
-              >
-                Start game!
-              </Button>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+        <Text>Spotify Playlist ID</Text>
+        <Input
+          value={playlistId}
+          onChange={({ target }) => setPlaylistId(target.value)}
+        />
+        <Button
+          mt={4}
+          colorScheme="green"
+          isDisabled={gameState === 'loading' || !players.length || !playlistId}
+          onClick={startGame}
+        >
+          Start game!
+        </Button>
       </CardBody>
     </Card>
   );
@@ -98,6 +56,9 @@ export const Admin = () => {
       flexWrap="wrap"
       justifyContent="center"
     >
+      <Card>
+        <CardBody>Room ID: {roomId}</CardBody>
+      </Card>
       {['idle', 'loading'].includes(gameState) && renderStartGameCards()}
       {['idle', 'loading'].includes(gameState) && (
         <Config stages={stages} onStagesUpdate={handleStagesUpdate} />

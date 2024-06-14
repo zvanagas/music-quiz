@@ -4,7 +4,6 @@ import {
   VICTORY_SONG,
   VOLUME_POINT,
 } from '@/config/constants';
-import { songs } from '@/config/songs';
 import { useSocket } from '@/contexts/socket-provider';
 import { Events } from '@/enums/events';
 import { AnswersData, PlayerData, PlayerGuess } from '@/types/events';
@@ -15,6 +14,7 @@ import { useCountdown } from './use-countdown.hook';
 import { Song } from '@/types/song';
 import { useConfig } from './use-config.hook';
 import { endpoints } from '@/config/endpoints';
+import { useRouter } from 'next/router';
 
 export const useAdmin = () => {
   const [loadedSongs, setLoadedSongs] = useState<HTMLAudioElement[]>([]);
@@ -23,10 +23,10 @@ export const useAdmin = () => {
   const [leaderboard, setLeaderboard] = useState<PlayerData[]>([]);
   const [currentStage, setCurrentStage] = useState<number>(0);
   const [gameState, setGameState] = useState<GameStates>('idle');
-  const [category, setCategory] = useState<string>('all');
   const [guessLog, setGuessLog] = useState<PlayerGuess[]>([]);
   const [victorySong, setVictorySong] = useState<HTMLAudioElement | null>(null);
   const [playlistId, setPlaylistId] = useState<string>('');
+  const { query } = useRouter();
   const socket = useSocket();
   const sortedPlayers = leaderboard.sort((a, b) => b.score - a.score);
   const previousStageSong = useMemo(
@@ -150,63 +150,44 @@ export const useAdmin = () => {
     [loadedSongs, currentStage]
   );
 
-  const startGame = useCallback(
-    async (type: 'default' | 'spotify') => {
-      setGameState('loading');
-      let currentSongs: Song[] = [];
-      if (type === 'default') {
-        currentSongs =
-          category === 'all'
-            ? songs
-            : songs.filter(({ tag }) => category === tag);
-      } else if (type === 'spotify') {
-        currentSongs = await (
-          await fetch(`${endpoints.spotify}?id=${playlistId}`)
-        ).json();
-      }
+  const startGame = useCallback(async () => {
+    setGameState('loading');
+    let currentSongs: Song[] = await (
+      await fetch(`${endpoints.spotify}?id=${playlistId}`)
+    ).json();
 
-      if (!currentSongs.length) {
-        setGameState('idle');
-        return;
-      }
+    if (!currentSongs.length) {
+      setGameState('idle');
+      return;
+    }
 
-      const { answers, songList } = await loadSongs(
-        currentSongs,
-        config.stages,
-        type === 'spotify'
-      );
-      if (!victorySong) {
-        const victory = await loadSong(VICTORY_SONG);
-        setVictorySong(victory);
-      }
-      setLoadedSongs(songList);
-      setAnswersData(answers);
-      setCurrentStage((prevStage) => prevStage + 1);
-      const currLeaderboard = players.map((name) => ({
-        name,
-        score: 0,
-        plusPoints: 0,
-        streak: 0,
-      }));
-      setLeaderboard(currLeaderboard);
-      socket?.emit(Events.Start, {
-        answers: answers[0].answers,
-        stage: 1,
-        scores: currLeaderboard,
-      });
-      startCountdown(WAIT_TIME);
-      setGameState('waiting');
-    },
-    [
+    const { answers, songList } = await loadSongs(
+      currentSongs,
       config.stages,
-      victorySong,
-      players,
-      socket,
-      startCountdown,
-      category,
-      playlistId,
-    ]
-  );
+      true
+    );
+    if (!victorySong) {
+      const victory = await loadSong(VICTORY_SONG);
+      setVictorySong(victory);
+    }
+    setLoadedSongs(songList);
+    setAnswersData(answers);
+    setCurrentStage((prevStage) => prevStage + 1);
+    const currLeaderboard = players.map((name) => ({
+      name,
+      score: 0,
+      plusPoints: 0,
+      streak: 0,
+    }));
+    setLeaderboard(currLeaderboard);
+    socket?.emit(Events.Start, {
+      answers: answers[0].answers,
+      stage: 1,
+      scores: currLeaderboard,
+    });
+    startCountdown(WAIT_TIME);
+    setGameState('waiting');
+  }, [config.stages, victorySong, players, socket, startCountdown, playlistId]);
 
   const resetGame = useCallback(() => {
     setGuessLog([]);
@@ -231,8 +212,6 @@ export const useAdmin = () => {
   return {
     startGame,
     resetGame,
-    category,
-    setCategory,
     gameState,
     currentStage,
     players,
@@ -245,6 +224,7 @@ export const useAdmin = () => {
     playlistId,
     setPlaylistId,
     stages: config.stages,
+    roomId: query.id,
     handleStagesUpdate,
   };
 };

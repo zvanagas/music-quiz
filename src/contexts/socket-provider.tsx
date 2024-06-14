@@ -19,16 +19,26 @@ export const useSocket = (): Socket<SocketEvents> | undefined =>
 
 type SocketProviderProps = PropsWithChildren & {
   id: string;
+  user: string;
+  type: 'admin' | 'user';
 };
 
-export const SocketProvider = ({ id, children }: SocketProviderProps) => {
+export const SocketProvider = ({
+  id,
+  user,
+  type,
+  children,
+}: SocketProviderProps) => {
   const [socket, setSocket] = useState<Socket<SocketEvents>>();
 
   const init = useCallback(async () => {
     await fetch(process.env.BASE_URL ?? '' + endpoints.socket);
-    const newSocket = io({ path: process.env.BASE_URL ?? '', query: { id } });
+    const newSocket = io({
+      path: process.env.BASE_URL ?? '',
+      query: { id, user, type },
+    });
     setSocket(newSocket);
-  }, [id]);
+  }, [id, user, type]);
 
   useEffect(() => {
     if (!socket && id) {

@@ -12,7 +12,7 @@ export const useCountdown = (onCountdownFinish?: () => void) => {
   }, []);
 
   useEffect(() => {
-    let interval: NodeJS.Timer;
+    let interval: NodeJS.Timeout;
 
     if (countdownState === 'running') {
       interval = setInterval(() => setCountdown((prev) => prev - 1), 1000);

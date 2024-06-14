@@ -9,7 +9,7 @@ import { STREAK_THRESHOLDS } from '@/config/constants';
 
 export const Play = () => {
   const {
-    id,
+    user,
     players,
     countdown,
     guess,
@@ -74,7 +74,7 @@ export const Play = () => {
   );
 
   const renderAnswerData = () => {
-    const streak = leaderboard.find((it) => it.name === id)?.streak;
+    const streak = leaderboard.find((it) => it.name === user)?.streak;
 
     return (
       <Box px={2} textAlign="center">
@@ -122,7 +122,7 @@ export const Play = () => {
         {leaderboard.length > 0 &&
           ['waiting', 'finished'].includes(gameState) && (
             <Leaderboard
-              playerName={id}
+              playerName={user}
               scores={leaderboard}
               isGameFinished={gameState === 'finished'}
             />

@@ -1,22 +1,41 @@
-import { useEffect } from 'react';
-import { SocketProvider } from '@/contexts/socket-provider';
+import { endpoints } from '@/config/endpoints';
 import { useSessionStorage } from '@/hooks/use-session-storage.hook';
-import { Admin } from '@/components/admin';
+import { Button, Flex, Input, Text } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
-const adminId = 'ADMIN';
+const AdminLogin = () => {
+  const router = useRouter();
+  const [name, setName] = useState('');
+  const [_, setUser] = useSessionStorage('user');
 
-const AdminWithSocket = () => {
-  const [_, setId] = useSessionStorage('id');
+  const handleCreate = async () => {
+    try {
+      const { id } = await fetch(endpoints.rooms, {
+        method: 'POST',
+        body: JSON.stringify({ name }),
+      }).then((response) => response.json());
 
-  useEffect(() => {
-    setId(adminId);
-  }, [setId]);
+      setUser(name);
+      router.push(`/admin/rooms/${id}`);
+    } catch {
+      //
+    }
+  };
 
   return (
-    <SocketProvider id={adminId}>
-      <Admin />
-    </SocketProvider>
+    <Flex flexDir="column" alignItems="center">
+      <Text>Welcome to Admin</Text>
+      <Input
+        borderColor="white"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <Button width="full" colorScheme="blue" mt="4" onClick={handleCreate}>
+        Create room
+      </Button>
+    </Flex>
   );
 };
 
-export default AdminWithSocket;
+export default AdminLogin;

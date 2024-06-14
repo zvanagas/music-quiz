@@ -29,7 +29,7 @@ export const Logo = () => {
       animation={`${rotation} infinite 3s`}
       transition="background-color .8s ease"
     >
-      Music Quiz
+      MuziQ
     </Flex>
   );
 };
