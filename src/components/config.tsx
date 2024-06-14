@@ -1,13 +1,8 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Heading,
-  Input,
-} from '@chakra-ui/react';
+import { Box, Button, Heading, Input } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import { Card } from './card/card';
+import { CardHeader } from './card/card-header';
+import { CardBody } from './card/card-body';
 
 type ConfigProps = {
   stages: number;

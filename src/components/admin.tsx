@@ -1,12 +1,14 @@
 'use client';
 
 import { Players } from '@/components/players';
-import { Button, Card, CardBody, Flex, Input, Text } from '@chakra-ui/react';
+import { Button, Flex, Input, Text } from '@chakra-ui/react';
 import { GuessesLog } from '@/components/guesses-log';
 import { ConnectedPlayers } from '@/components/connected-players';
 import { StageInfo } from '@/components/stage-info';
 import { useAdmin } from '@/hooks/use-admin.hook';
 import { Config } from './config';
+import { Card } from './card/card';
+import { CardBody } from './card/card-body';
 
 export const Admin = () => {
   const {
