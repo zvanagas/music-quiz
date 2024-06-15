@@ -1,8 +1,9 @@
-import { Box, Button, Heading, Input } from '@chakra-ui/react';
+import { Box, Button, Input } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Card } from './card/card';
 import { CardHeader } from './card/card-header';
 import { CardBody } from './card/card-body';
+import { Heading } from './heading';
 
 type ConfigProps = {
   stages: number;
@@ -19,7 +20,7 @@ export const Config = ({ stages, onStagesUpdate }: ConfigProps) => {
   return (
     <Card>
       <CardHeader>
-        <Heading size="md">Config</Heading>
+        <Heading>Config</Heading>
       </CardHeader>
       <CardBody>
         <Box>Stages</Box>

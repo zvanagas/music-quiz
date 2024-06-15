@@ -1,4 +1,4 @@
-import { Card, CardBody, CardProps, HStack, Text } from '@chakra-ui/react';
+import { Card, CardBody, CardProps, HStack } from '@chakra-ui/react';
 import { Avatar } from '../avatar';
 
 type LeaderboardRowProps = CardProps & {
@@ -32,17 +32,15 @@ export const LeaderboardRow = ({
         alignItems="center"
       >
         <HStack>
-          <Text>{place}.</Text>
+          <p>{place}.</p>
           <HStack>
             <Avatar name={name} />
-            <Text fontSize="l" fontWeight="bold">
-              {name}
-            </Text>
+            <p className="font-bold">{name}</p>
           </HStack>
         </HStack>
-        <Text fontSize="l" fontWeight="bold">
+        <p className="font-bold">
           {score} {plusPoints > 0 && ` (+${plusPoints})`}
-        </Text>
+        </p>
       </CardBody>
     </Card>
   );

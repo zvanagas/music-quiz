@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Box, Flex, Grid, Text } from '@chakra-ui/react';
+import { Box, Flex, Grid } from '@chakra-ui/react';
 import { Answer } from '@/components/answer';
 import { Leaderboard } from '@/components/leaderboard';
 import { PlayersWaiting } from '@/components/players-waiting';
@@ -27,21 +27,14 @@ export const Play = () => {
     if (countdown) {
       return (
         <>
-          Wait time:{' '}
-          <Text as="span" fontWeight={800}>
-            {countdown}
-          </Text>{' '}
-          seconds
+          Wait time: <span className="font-extabold">{countdown}</span> seconds
         </>
       );
     }
     if (guessCountdown) {
       return (
         <>
-          Guessing time:{' '}
-          <Text as="span" fontWeight={800}>
-            {guessCountdown}
-          </Text>{' '}
+          Guessing time: <span className="font-extabold">{guessCountdown}</span>{' '}
           seconds
         </>
       );
@@ -78,20 +71,17 @@ export const Play = () => {
 
     return (
       <Box px={2} textAlign="center">
-        <Text>
-          <Text as="span" fontWeight={800}>
-            Answer:
-          </Text>{' '}
-          {prevRoundAnswer}{' '}
+        <p>
+          <span className="font-extrabold">Answer:</span> {prevRoundAnswer}{' '}
           {!!selectedAnswer?.answer &&
             `(${
               prevRoundAnswer === selectedAnswer?.answer
                 ? 'CORRECT'
                 : 'INCORRECT'
             })`}
-        </Text>
+        </p>
         {STREAK_THRESHOLDS.includes(streak ?? 0) && (
-          <Text fontWeight={800}>{streak} in a row!</Text>
+          <p className="font-extrabold">{streak} in a row!</p>
         )}
       </Box>
     );
@@ -107,14 +97,14 @@ export const Play = () => {
         height="full"
       >
         {gameState !== 'finished' && (
-          <Text fontSize="4xl">
+          <p className="text-4xl">
             Stage: {currentStage}/{stages}
-          </Text>
+          </p>
         )}
         {gameState !== 'finished' && (
-          <Text as="h2" fontSize="xl" textAlign="center">
+          <h2 className="text-xl text-center">
             {currCountdown || 'Waiting...'}
-          </Text>
+          </h2>
         )}
         {['waiting', 'finished'].includes(gameState) &&
           prevRoundAnswer &&

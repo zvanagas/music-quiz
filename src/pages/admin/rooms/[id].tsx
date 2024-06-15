@@ -16,14 +16,8 @@ const AdminWithSocket = () => {
   const roomId = router.query.id;
 
   useEffect(() => {
-    if (!roomId) {
-      router.push('/admin');
-      return;
-    }
-
-    setIsLoading(true);
-
     async function loadRoom() {
+      setIsLoading(true);
       try {
         const room = await fetch(`${endpoints.rooms}/${roomId}`);
 
@@ -35,8 +29,10 @@ const AdminWithSocket = () => {
       }
     }
 
-    loadRoom();
-  }, [roomId, router]);
+    if (roomId) {
+      loadRoom();
+    }
+  }, [router, roomId]);
 
   if (!roomId) {
     return null;

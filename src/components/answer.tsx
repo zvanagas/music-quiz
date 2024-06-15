@@ -1,7 +1,7 @@
 import { SONG_NAME_LIMIT } from '@/config/constants';
 import { SelectedAnswer } from '@/types/events';
 import { GameStates } from '@/types/game-states';
-import { Button, Divider, ThemingProps, Text } from '@chakra-ui/react';
+import { Button, Divider, ThemingProps } from '@chakra-ui/react';
 
 const colorSchemes: ThemingProps['colorScheme'][] = [
   'blue',
@@ -47,11 +47,9 @@ export const Answer = ({
       colorScheme={colorSchemes[index]}
       onClick={() => onClick(fullSongName, index)}
     >
-      <Text px={2}>{artist}</Text>
+      <p className="px-2">{artist}</p>
       <Divider bgColor="black" my={2} height={1} />
-      <Text px={2} wordBreak="break-word">
-        {songName}
-      </Text>
+      <p className="px-2 break-words">{songName}</p>
     </Button>
   );
 };

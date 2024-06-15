@@ -1,5 +1,5 @@
 import { PlayerData } from '@/types/events';
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { LeaderboardRow } from './leaderboard-row';
 import { appear } from '@/animations/appear';
 
@@ -23,9 +23,9 @@ export const Leaderboard = ({
 
   return (
     <Flex flexDirection="column" alignSelf="center" gap={2} width="90%">
-      <Text textAlign="center" fontWeight="extrabold" fontSize="2xl">
+      <p className="text-center font-extrabold text-2xl">
         {isGameFinished ? 'Final Results' : 'Results'}
-      </Text>
+      </p>
       {scores.map((player, index) => (
         <LeaderboardRow
           sx={isGameFinished ? leaderboardSx(index) : undefined}

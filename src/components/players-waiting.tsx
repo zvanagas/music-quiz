@@ -1,4 +1,4 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { PlayerBox } from './player-box';
 
 type PlayersWaitingProps = {
@@ -14,9 +14,7 @@ export const PlayersWaiting = ({ players }: PlayersWaitingProps) => {
       py={10}
       height="full"
     >
-      <Text mt={4} fontSize="4xl">
-        Waiting...
-      </Text>
+      <p className="mt-1 text-4xl">Waiting...</p>
       <Flex flexWrap="wrap" alignItems="center" justifyContent="center">
         {players.map((name) => (
           <PlayerBox key={name} name={name} />

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSessionStorage } from '@/hooks/use-session-storage.hook';
 import { useRouter } from 'next/router';
-import { Button, Flex, Input, Text } from '@chakra-ui/react';
+import { Button, Flex, Input } from '@chakra-ui/react';
 import { Logo } from '@/components/logo';
 import { endpoints } from '@/config/endpoints';
 import { useToast } from '@/contexts/toast-provider';
@@ -51,13 +51,13 @@ const Name = () => {
       height="full"
     >
       <Logo />
-      <Text mt="10">Room ID</Text>
+      <p className="mt-10">Room ID</p>
       <Input
         borderColor="white"
         value={roomId}
         onChange={(e) => setRoomId(e.target.value)}
       />
-      <Text>Name</Text>
+      <p>Name</p>
       <Input
         borderColor="white"
         value={name}

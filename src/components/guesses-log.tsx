@@ -1,8 +1,9 @@
 import { PlayerGuess } from '@/types/events';
-import { UnorderedList, ListItem, Heading } from '@chakra-ui/react';
+import { UnorderedList, ListItem } from '@chakra-ui/react';
 import { Card } from './card/card';
 import { CardHeader } from './card/card-header';
 import { CardBody } from './card/card-body';
+import { Heading } from './heading';
 
 type GuessesLogProps = {
   guesses: PlayerGuess[];
@@ -12,7 +13,7 @@ export const GuessesLog = ({ guesses }: GuessesLogProps) => {
   return (
     <Card>
       <CardHeader>
-        <Heading size="md">Guesses</Heading>
+        <Heading>Guesses</Heading>
       </CardHeader>
       <CardBody>
         <div className="max-h-[400px] overflow-y-auto">

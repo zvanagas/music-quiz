@@ -1,4 +1,4 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { Avatar } from './avatar';
 import { rotation } from '@/animations/rotation';
 
@@ -19,10 +19,11 @@ export const PlayerBox = ({ name }: PlayerBoxProps) => {
       borderRadius="20"
       fontSize="l"
       m={4}
+      gap={2}
       animation={`${rotation} infinite 3s`}
     >
       <Avatar name={name} />
-      <Text mt={2}>{name}</Text>
+      <p>{name}</p>
     </Flex>
   );
 };

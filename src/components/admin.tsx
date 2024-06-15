@@ -1,7 +1,7 @@
 'use client';
 
 import { Players } from '@/components/players';
-import { Button, Flex, Input, Text } from '@chakra-ui/react';
+import { Button, Flex, Input } from '@chakra-ui/react';
 import { GuessesLog } from '@/components/guesses-log';
 import { ConnectedPlayers } from '@/components/connected-players';
 import { StageInfo } from '@/components/stage-info';
@@ -33,7 +33,7 @@ export const Admin = () => {
   const renderStartGameCards = () => (
     <Card>
       <CardBody>
-        <Text>Spotify Playlist ID</Text>
+        <p>Spotify Playlist ID</p>
         <Input
           value={playlistId}
           onChange={({ target }) => setPlaylistId(target.value)}

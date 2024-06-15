@@ -1,17 +1,10 @@
 import { GameStates } from '@/types/game-states';
-import {
-  Text,
-  Heading,
-  Box,
-  OrderedList,
-  ListItem,
-  Divider,
-  Button,
-} from '@chakra-ui/react';
+import { Box, OrderedList, ListItem, Divider, Button } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Card } from './card/card';
 import { CardHeader } from './card/card-header';
 import { CardBody } from './card/card-body';
+import { Heading } from './heading';
 
 type StageInfoProps = {
   stage: number;
@@ -37,33 +30,33 @@ export const StageInfo = ({
   return (
     <Card>
       <CardHeader>
-        <Heading size="md">
+        <Heading>
           Stage {stage}/{stages}
         </Heading>
       </CardHeader>
       <CardBody>
         <div className="flex flex-col gap-4">
           {['idle', 'loading'].includes(gameState) && (
-            <Text>Waiting for game to start...</Text>
+            <p>Waiting for game to start...</p>
           )}
-          {gameState === 'waiting' && <Text>WAIT: {countdown}s</Text>}
-          {gameState === 'guessing' && <Text>GUESS: {guessCountdown}s</Text>}
+          {gameState === 'waiting' && <p>WAIT: {countdown}s</p>}
+          {gameState === 'guessing' && <p>GUESS: {guessCountdown}s</p>}
           {['waiting', 'guessing'].includes(gameState) && (
             <Box>
               <Divider my={2} />
-              <Text>Possible answers:</Text>
+              <p>Possible answers:</p>
               <OrderedList>
                 {stageAnswers.map((answer) => (
                   <ListItem key={answer}>
-                    <Text
-                      fontWeight={
+                    <p
+                      className={
                         isAnswerShown && answer === correctAnswer
-                          ? 800
+                          ? 'font-extrabold'
                           : undefined
                       }
                     >
                       {answer}
-                    </Text>
+                    </p>
                   </ListItem>
                 ))}
               </OrderedList>
