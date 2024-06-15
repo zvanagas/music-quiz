@@ -3,9 +3,9 @@ import { Box, Flex, Grid } from '@chakra-ui/react';
 import { Answer } from '@/components/answer';
 import { Leaderboard } from '@/components/leaderboard';
 import { PlayersWaiting } from '@/components/players-waiting';
-import { Confetti } from '@/components/confetti';
 import { usePlay } from '@/hooks/use-play.hook';
 import { STREAK_THRESHOLDS } from '@/config/constants';
+import { Confetti } from './confetti';
 
 export const Play = () => {
   const {

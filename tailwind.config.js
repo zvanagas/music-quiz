@@ -5,7 +5,18 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        rain: {
+          '0%': { opacity: '0' },
+          '20%': { opacity: '1' },
+          '100%': { transform: 'translateY(100vh)' },
+        },
+      },
+      animation: {
+        rain: 'rain 1000ms infinite ease-out',
+      }
+    },
   },
   plugins: [],
 }
