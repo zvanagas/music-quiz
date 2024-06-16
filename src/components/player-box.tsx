@@ -1,8 +1,11 @@
-import { Flex } from '@chakra-ui/react';
 import { Avatar } from './avatar';
-import { rotation } from '@/animations/rotation';
 
-const colors = ['yellow.600', 'orange.600', 'green.600', 'blue.600'];
+const colors = [
+  'bg-yellow-600',
+  'bg-orange-600',
+  'bg-green-600',
+  'bg-blue-600',
+];
 
 type PlayerBoxProps = {
   name: string;
@@ -10,20 +13,11 @@ type PlayerBoxProps = {
 
 export const PlayerBox = ({ name }: PlayerBoxProps) => {
   return (
-    <Flex
-      bgColor={colors[0]}
-      boxSize="36"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      borderRadius="20"
-      fontSize="l"
-      m={4}
-      gap={2}
-      animation={`${rotation} infinite 3s`}
+    <div
+      className={`w-36 h-36 flex flex-col items-center justify-center rounded-3xl m-4 gap-2 ${colors[0]}`}
     >
       <Avatar name={name} />
       <p>{name}</p>
-    </Flex>
+    </div>
   );
 };

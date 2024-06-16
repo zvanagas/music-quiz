@@ -1,5 +1,3 @@
-import { rain } from '@/animations/rain';
-
 const confettiStyles = [
   {
     left: '7%',

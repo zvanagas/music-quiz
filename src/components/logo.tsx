@@ -1,8 +1,11 @@
-import { rotation } from '@/animations/rotation';
-import { Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
-const colors = ['yellow.600', 'orange.600', 'green.600', 'blue.600'];
+const colors = [
+  'bg-yellow-600',
+  'bg-orange-600',
+  'bg-green-600',
+  'bg-blue-600',
+];
 
 export const Logo = () => {
   const [color, setColor] = useState<string>(colors[0]);
@@ -19,17 +22,10 @@ export const Logo = () => {
   }, []);
 
   return (
-    <Flex
-      bgColor={color}
-      boxSize="40"
-      alignItems="center"
-      justifyContent="center"
-      borderRadius="20"
-      fontSize="xl"
-      animation={`${rotation} infinite 3s`}
-      transition="background-color .8s ease"
+    <div
+      className={`flex items-center justify-center rounded-3xl text-xl w-40 h-40 transition-colors duration-800 ease-in-out animate-rotation ${color}`}
     >
       MuziQ
-    </Flex>
+    </div>
   );
 };
