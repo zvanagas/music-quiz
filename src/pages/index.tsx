@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useSessionStorage } from '@/hooks/use-session-storage.hook';
 import { useRouter } from 'next/router';
-import { Button, Flex, Input } from '@chakra-ui/react';
+import { Button, Input } from '@chakra-ui/react';
 import { Logo } from '@/components/logo';
 import { endpoints } from '@/config/endpoints';
 import { useToast } from '@/contexts/toast-provider';
+import { Avatar } from '@/components/avatar';
 
 const Name = () => {
   const [name, setName] = useState<string>('');
@@ -43,13 +44,8 @@ const Name = () => {
   };
 
   return (
-    <Flex
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      px="10"
-      height="full"
-    >
+    <div className="flex flex-col items-center justify-center px-10 h-full">
+      <Avatar name={'ABC'} />
       <Logo />
       <p className="mt-10">Room ID</p>
       <Input
@@ -72,7 +68,7 @@ const Name = () => {
       >
         Join
       </Button>
-    </Flex>
+    </div>
   );
 };
 

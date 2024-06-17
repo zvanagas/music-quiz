@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Box, Flex, Grid } from '@chakra-ui/react';
+import { Grid } from '@chakra-ui/react';
 import { Answer } from '@/components/answer';
 import { Leaderboard } from '@/components/leaderboard';
 import { PlayersWaiting } from '@/components/players-waiting';
@@ -44,13 +44,7 @@ export const Play = () => {
   }, [countdown, guessCountdown]);
 
   const renderGuessContent = () => (
-    <Flex
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      width="full"
-      height="full"
-    >
+    <div className="flex flex-col items-center justify-center w-full h-full">
       <Grid gridTemplateColumns="1fr 1fr" gap={4}>
         {answers.map((song, i) => (
           <Answer
@@ -63,14 +57,14 @@ export const Play = () => {
           />
         ))}
       </Grid>
-    </Flex>
+    </div>
   );
 
   const renderAnswerData = () => {
     const streak = leaderboard.find((it) => it.name === user)?.streak;
 
     return (
-      <Box px={2} textAlign="center">
+      <div className="px-2 text-center">
         <p>
           <span className="font-extrabold">Answer:</span> {prevRoundAnswer}{' '}
           {!!selectedAnswer?.answer &&
@@ -83,19 +77,13 @@ export const Play = () => {
         {STREAK_THRESHOLDS.includes(streak ?? 0) && (
           <p className="font-extrabold">{streak} in a row!</p>
         )}
-      </Box>
+      </div>
     );
   };
 
   const renderContent = () => {
     return (
-      <Flex
-        flexDirection="column"
-        alignItems="center"
-        gap={4}
-        py={8}
-        height="full"
-      >
+      <div className="flex flex-col items-center gap-4 py-8 h-full">
         {gameState !== 'finished' && (
           <p className="text-4xl">
             Stage: {currentStage}/{stages}
@@ -119,7 +107,7 @@ export const Play = () => {
           )}
         {gameState === 'guessing' && renderGuessContent()}
         {gameState === 'finished' && <Confetti />}
-      </Flex>
+      </div>
     );
   };
 

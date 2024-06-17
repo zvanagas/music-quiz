@@ -1,5 +1,4 @@
 import { PlayerData } from '@/types/events';
-import { Flex } from '@chakra-ui/react';
 import { LeaderboardRow } from './leaderboard-row';
 
 type LeaderboardProps = {
@@ -14,7 +13,7 @@ export const Leaderboard = ({
   isGameFinished,
 }: LeaderboardProps) => {
   return (
-    <Flex flexDirection="column" alignSelf="center" gap={2} width="90%">
+    <div className="flex flex-col self-center gap-2 w-[90%]">
       <p className="text-center font-extrabold text-2xl">
         {isGameFinished ? 'Final Results' : 'Results'}
       </p>
@@ -30,6 +29,6 @@ export const Leaderboard = ({
           isYours={playerName === player.name}
         />
       ))}
-    </Flex>
+    </div>
   );
 };

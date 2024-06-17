@@ -1,4 +1,4 @@
-import { Box, Button, Input } from '@chakra-ui/react';
+import { Button, Input } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Card } from './card/card';
 import { CardHeader } from './card/card-header';
@@ -23,7 +23,7 @@ export const Config = ({ stages, onStagesUpdate }: ConfigProps) => {
         <Heading>Config</Heading>
       </CardHeader>
       <CardBody>
-        <Box>Stages</Box>
+        <div>Stages</div>
         <Input
           value={stagesValue}
           onChange={({ target }) => setStagesValue(Number(target.value))}

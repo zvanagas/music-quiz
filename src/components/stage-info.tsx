@@ -1,5 +1,5 @@
 import { GameStates } from '@/types/game-states';
-import { Box, OrderedList, ListItem, Divider, Button } from '@chakra-ui/react';
+import { OrderedList, ListItem, Divider, Button } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Card } from './card/card';
 import { CardHeader } from './card/card-header';
@@ -42,7 +42,7 @@ export const StageInfo = ({
           {gameState === 'waiting' && <p>WAIT: {countdown}s</p>}
           {gameState === 'guessing' && <p>GUESS: {guessCountdown}s</p>}
           {['waiting', 'guessing'].includes(gameState) && (
-            <Box>
+            <div>
               <Divider my={2} />
               <p>Possible answers:</p>
               <OrderedList>
@@ -60,7 +60,7 @@ export const StageInfo = ({
                   </ListItem>
                 ))}
               </OrderedList>
-            </Box>
+            </div>
           )}
           {!['idle', 'loading'].includes(gameState) && (
             <Button onClick={() => setIsAnswerShown(!isAnswerShown)}>

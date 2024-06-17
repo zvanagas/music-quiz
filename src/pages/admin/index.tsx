@@ -1,6 +1,6 @@
 import { endpoints } from '@/config/endpoints';
 import { useSessionStorage } from '@/hooks/use-session-storage.hook';
-import { Button, Flex, Input } from '@chakra-ui/react';
+import { Button, Input } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -24,7 +24,7 @@ const AdminLogin = () => {
   };
 
   return (
-    <Flex flexDir="column" alignItems="center">
+    <div className="flex flex-col items-center">
       <p>Welcome to Admin</p>
       <Input
         borderColor="white"
@@ -34,7 +34,7 @@ const AdminLogin = () => {
       <Button width="full" colorScheme="blue" mt="4" onClick={handleCreate}>
         Create room
       </Button>
-    </Flex>
+    </div>
   );
 };
 

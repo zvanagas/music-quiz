@@ -1,7 +1,7 @@
 'use client';
 
 import { Players } from '@/components/players';
-import { Button, Flex, Input } from '@chakra-ui/react';
+import { Button, Input } from '@chakra-ui/react';
 import { GuessesLog } from '@/components/guesses-log';
 import { ConnectedPlayers } from '@/components/connected-players';
 import { StageInfo } from '@/components/stage-info';
@@ -51,13 +51,7 @@ export const Admin = () => {
   );
 
   return (
-    <Flex
-      flexDirection="column"
-      p={4}
-      gap={4}
-      flexWrap="wrap"
-      justifyContent="center"
-    >
+    <div className="flex flex-col p-4 gap-4 flex-wrap justify-center">
       <Card>
         <CardBody>Room ID: {roomId}</CardBody>
       </Card>
@@ -90,6 +84,6 @@ export const Admin = () => {
           </CardBody>
         </Card>
       )}
-    </Flex>
+    </div>
   );
 };

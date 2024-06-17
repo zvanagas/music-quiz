@@ -1,4 +1,3 @@
-import { Flex } from '@chakra-ui/react';
 import { PlayerBox } from './player-box';
 
 type PlayersWaitingProps = {
@@ -7,19 +6,13 @@ type PlayersWaitingProps = {
 
 export const PlayersWaiting = ({ players }: PlayersWaitingProps) => {
   return (
-    <Flex
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      py={10}
-      height="full"
-    >
+    <div className="flex flex-col items-center justify-center py-10 h-full">
       <p className="mt-1 text-4xl">Waiting...</p>
-      <Flex flexWrap="wrap" alignItems="center" justifyContent="center">
+      <div className="flex flex-wrap items-center justify-center">
         {players.map((name) => (
           <PlayerBox key={name} name={name} />
         ))}
-      </Flex>
-    </Flex>
+      </div>
+    </div>
   );
 };

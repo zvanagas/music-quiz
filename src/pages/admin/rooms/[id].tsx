@@ -6,7 +6,6 @@ import { useSessionStorage } from '@/hooks/use-session-storage.hook';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { endpoints } from '@/config/endpoints';
-import { Box } from '@chakra-ui/react';
 
 const AdminWithSocket = () => {
   const [user] = useSessionStorage('user');
@@ -39,7 +38,7 @@ const AdminWithSocket = () => {
   }
 
   if (isLoading) {
-    return <Box>Loading...</Box>;
+    return <div>Loading...</div>;
   }
 
   return (

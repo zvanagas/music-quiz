@@ -1,4 +1,3 @@
-import { Flex } from '@chakra-ui/react';
 import { getColorName } from '@/utils';
 
 type AvatarProps = {
@@ -10,15 +9,12 @@ export const Avatar = ({ name }: AvatarProps) => {
   const code = upperCasedName.charCodeAt(0) + upperCasedName.charCodeAt(1);
 
   return (
-    <Flex
-      alignItems="center"
-      justifyContent="center"
-      boxSize={12}
-      borderRadius={50}
-      bgColor={getColorName(code)}
-      mx={2}
+    <div
+      className={`flex items-center justify-center w-12 h-12 mx-2 rounded-full ${getColorName(
+        code
+      )}`}
     >
       {upperCasedName[0]}
-    </Flex>
+    </div>
   );
 };
