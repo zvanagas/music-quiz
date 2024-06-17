@@ -5,7 +5,6 @@ import { Button, Input } from '@chakra-ui/react';
 import { Logo } from '@/components/logo';
 import { endpoints } from '@/config/endpoints';
 import { useToast } from '@/contexts/toast-provider';
-import { Avatar } from '@/components/avatar';
 
 const Name = () => {
   const [name, setName] = useState<string>('');
@@ -45,7 +44,6 @@ const Name = () => {
 
   return (
     <div className="flex flex-col items-center justify-center px-10 h-full">
-      <Avatar name={'ABC'} />
       <Logo />
       <p className="mt-10">Room ID</p>
       <Input
