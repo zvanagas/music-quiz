@@ -1,7 +1,6 @@
 import { PlayerData } from '@/types/events';
 import { Flex } from '@chakra-ui/react';
 import { LeaderboardRow } from './leaderboard-row';
-import { appear } from '@/animations/appear';
 
 type LeaderboardProps = {
   scores: PlayerData[];
@@ -14,13 +13,6 @@ export const Leaderboard = ({
   playerName,
   isGameFinished,
 }: LeaderboardProps) => {
-  const maximumDelay = scores.length * 2000;
-  const leaderboardSx = (index: number) => ({
-    animation: `${appear} 3s normal forwards`,
-    animationDelay: `${maximumDelay - index * 2000}ms`,
-    opacity: 0,
-  });
-
   return (
     <Flex flexDirection="column" alignSelf="center" gap={2} width="90%">
       <p className="text-center font-extrabold text-2xl">
@@ -28,12 +20,13 @@ export const Leaderboard = ({
       </p>
       {scores.map((player, index) => (
         <LeaderboardRow
-          sx={isGameFinished ? leaderboardSx(index) : undefined}
           key={player.name}
           place={index + 1}
           name={player.name}
           score={player.score}
           plusPoints={player.plusPoints}
+          totalRowsCount={scores.length}
+          shouldAppear={isGameFinished}
           isYours={playerName === player.name}
         />
       ))}

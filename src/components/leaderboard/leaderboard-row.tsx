@@ -1,15 +1,19 @@
-import { Card, CardBody, CardProps, HStack } from '@chakra-ui/react';
+import { HStack } from '@chakra-ui/react';
 import { Avatar } from '../avatar';
+import { CSSProperties } from 'react';
 
-type LeaderboardRowProps = CardProps & {
+type LeaderboardRowProps = {
   place: number;
   name: string;
   score: number;
   plusPoints: number;
   isYours: boolean;
+  totalRowsCount: number;
+  shouldAppear?: boolean;
+  style?: CSSProperties;
 };
 
-const positionColors = ['red.600', 'green.600', 'blue.600'];
+const positionColors = ['bg-red-600', 'bg-green-600', 'bg-blue-600'];
 
 export const LeaderboardRow = ({
   place,
@@ -17,31 +21,46 @@ export const LeaderboardRow = ({
   score,
   isYours,
   plusPoints,
-  sx,
+  totalRowsCount,
+  shouldAppear,
 }: LeaderboardRowProps) => {
+  const maximumDelay = totalRowsCount * 2000;
+
+  const getClasses = () => {
+    let classes = `flex flex-1 p-5 justify-between items-center rounded shadow break-words ${
+      positionColors[place - 1] ?? 'bg-slate-800'
+    }`;
+
+    if (isYours) {
+      classes += ' border-2 border-solid border-white';
+    }
+
+    if (shouldAppear) {
+      classes += ' animate-appear opacity-0';
+    }
+
+    return classes;
+  };
+
   return (
-    <Card
-      sx={sx}
-      flex={1}
-      bgColor={positionColors[place - 1]}
-      border={isYours ? '3px solid' : undefined}
+    <div
+      className={getClasses()}
+      style={
+        shouldAppear
+          ? { animationDelay: `${maximumDelay - (place - 1) * 2000}ms` }
+          : undefined
+      }
     >
-      <CardBody
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-      >
+      <HStack>
+        <p>{place}.</p>
         <HStack>
-          <p>{place}.</p>
-          <HStack>
-            <Avatar name={name} />
-            <p className="font-bold">{name}</p>
-          </HStack>
+          <Avatar name={name} />
+          <p className="font-bold">{name}</p>
         </HStack>
-        <p className="font-bold">
-          {score} {plusPoints > 0 && ` (+${plusPoints})`}
-        </p>
-      </CardBody>
-    </Card>
+      </HStack>
+      <p className="font-bold">
+        {score} {plusPoints > 0 && ` (+${plusPoints})`}
+      </p>
+    </div>
   );
 };

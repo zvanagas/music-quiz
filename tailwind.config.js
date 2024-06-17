@@ -7,6 +7,10 @@ module.exports = {
   theme: {
     extend: {
       keyframes: {
+        appear: {
+          'from': { opacity: '0' },
+          'to': { opacity: '1' },
+        },
         rain: {
           '0%': { opacity: '0' },
           '20%': { opacity: '1' },
@@ -30,6 +34,7 @@ module.exports = {
       animation: {
         rain: 'rain 1000ms infinite ease-out',
         rotation: 'rotation infinite 3s',
+        appear: 'appear 3s normal forwards',
       }
     },
   },
