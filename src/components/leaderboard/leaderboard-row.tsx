@@ -1,4 +1,3 @@
-import { HStack } from '@chakra-ui/react';
 import { Avatar } from '../avatar';
 import { CSSProperties } from 'react';
 
@@ -51,13 +50,13 @@ export const LeaderboardRow = ({
           : undefined
       }
     >
-      <HStack>
+      <div className="flex items-center gap-0.5">
         <p>{place}.</p>
-        <HStack>
+        <div className="flex items-center gap-0.5">
           <Avatar name={name} />
           <p className="font-bold">{name}</p>
-        </HStack>
-      </HStack>
+        </div>
+      </div>
       <p className="font-bold">
         {score} {plusPoints > 0 && ` (+${plusPoints})`}
       </p>

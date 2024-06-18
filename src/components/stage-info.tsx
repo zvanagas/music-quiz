@@ -1,5 +1,5 @@
-import { GameStates } from '@/types/game-states';
-import { OrderedList, ListItem, Divider, Button } from '@chakra-ui/react';
+import { GameState } from '@/types/game-state';
+import { Divider, Button } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Card } from './card/card';
 import { CardHeader } from './card/card-header';
@@ -8,7 +8,7 @@ import { Heading } from './heading';
 
 type StageInfoProps = {
   stage: number;
-  gameState: GameStates;
+  gameState: GameState;
   countdown: number;
   guessCountdown: number;
   stageAnswers: string[];
@@ -45,9 +45,9 @@ export const StageInfo = ({
             <div>
               <Divider my={2} />
               <p>Possible answers:</p>
-              <OrderedList>
+              <ol className="list-decimal ms-4">
                 {stageAnswers.map((answer) => (
-                  <ListItem key={answer}>
+                  <li key={answer}>
                     <p
                       className={
                         isAnswerShown && answer === correctAnswer
@@ -57,9 +57,9 @@ export const StageInfo = ({
                     >
                       {answer}
                     </p>
-                  </ListItem>
+                  </li>
                 ))}
-              </OrderedList>
+              </ol>
             </div>
           )}
           {!['idle', 'loading'].includes(gameState) && (

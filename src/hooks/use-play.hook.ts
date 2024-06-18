@@ -8,7 +8,7 @@ import {
   Wait,
   Results,
 } from '@/types/events';
-import { GameStates } from '@/types/game-states';
+import { GameState } from '@/types/game-state';
 import { useRouter } from 'next/router';
 import { useState, useEffect, useCallback } from 'react';
 import { useCountdown } from './use-countdown.hook';
@@ -20,7 +20,7 @@ export const usePlay = () => {
   const [answers, setAnswers] = useState<string[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer>();
   const [currentStage, setCurrentStage] = useState(0);
-  const [gameState, setGameState] = useState<GameStates>('idle');
+  const [gameState, setGameState] = useState<GameState>('idle');
   const [prevRoundAnswer, setPrevRoundAnswer] = useState('');
   const [players, setPlayers] = useState<string[]>([]);
   const [guessingStartTime, setGuessingStartTime] = useState<number>(0);

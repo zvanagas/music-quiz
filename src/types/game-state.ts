@@ -1,4 +1,4 @@
-export type GameStates =
+export type GameState =
   | 'idle'
   | 'loading'
   | 'waiting'

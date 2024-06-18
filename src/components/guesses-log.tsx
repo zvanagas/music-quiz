@@ -1,5 +1,4 @@
 import { PlayerGuess } from '@/types/events';
-import { UnorderedList, ListItem } from '@chakra-ui/react';
 import { Card } from './card/card';
 import { CardHeader } from './card/card-header';
 import { CardBody } from './card/card-body';
@@ -17,13 +16,13 @@ export const GuessesLog = ({ guesses }: GuessesLogProps) => {
       </CardHeader>
       <CardBody>
         <div className="max-h-[400px] overflow-y-auto">
-          <UnorderedList>
+          <ul className="list-disc ms-4">
             {guesses.map((it) => (
-              <ListItem key={`${it.name}-${it.answer}`}>
+              <li key={`${it.name}-${it.answer}`}>
                 {it.name} guessed {it.answer} (Points {it.points})
-              </ListItem>
+              </li>
             ))}
-          </UnorderedList>
+          </ul>
         </div>
       </CardBody>
     </Card>

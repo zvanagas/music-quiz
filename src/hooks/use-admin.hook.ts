@@ -7,7 +7,7 @@ import {
 import { useSocket } from '@/contexts/socket-provider';
 import { Events } from '@/enums/events';
 import { AnswersData, PlayerData, PlayerGuess } from '@/types/events';
-import { GameStates } from '@/types/game-states';
+import { GameState } from '@/types/game-state';
 import { loadSongs, loadSong } from '@/utils';
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useCountdown } from './use-countdown.hook';
@@ -22,7 +22,7 @@ export const useAdmin = () => {
   const [players, setPlayers] = useState<string[]>([]);
   const [leaderboard, setLeaderboard] = useState<PlayerData[]>([]);
   const [currentStage, setCurrentStage] = useState<number>(0);
-  const [gameState, setGameState] = useState<GameStates>('idle');
+  const [gameState, setGameState] = useState<GameState>('idle');
   const [guessLog, setGuessLog] = useState<PlayerGuess[]>([]);
   const [victorySong, setVictorySong] = useState<HTMLAudioElement | null>(null);
   const [playlistId, setPlaylistId] = useState<string>('');

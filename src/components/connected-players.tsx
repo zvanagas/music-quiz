@@ -1,4 +1,3 @@
-import { ListItem, OrderedList } from '@chakra-ui/react';
 import { Card } from './card/card';
 import { CardHeader } from './card/card-header';
 import { CardBody } from './card/card-body';
@@ -15,11 +14,11 @@ export const ConnectedPlayers = ({ players }: ConnectedPlayersProps) => {
         <Heading>Connected players</Heading>
       </CardHeader>
       <CardBody>
-        <OrderedList>
+        <ol className="list-decimal ms-4">
           {players.map((player, i) => (
-            <ListItem key={`${player}-${i}`}>{player}</ListItem>
+            <li key={`${player}-${i}`}>{player}</li>
           ))}
-        </OrderedList>
+        </ol>
       </CardBody>
     </Card>
   );

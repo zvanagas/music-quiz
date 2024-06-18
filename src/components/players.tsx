@@ -1,5 +1,4 @@
 import { PlayerData } from '@/types/events';
-import { ListItem, OrderedList } from '@chakra-ui/react';
 import { Card } from './card/card';
 import { CardHeader } from './card/card-header';
 import { CardBody } from './card/card-body';
@@ -16,13 +15,13 @@ export const Players = ({ players }: PlayersProps) => {
         <Heading>Leaderboard</Heading>
       </CardHeader>
       <CardBody>
-        <OrderedList>
+        <ol className="list-decimal ms-4">
           {players.map((it, i) => (
-            <ListItem key={i}>
+            <li key={i}>
               {it.name} {it.score} points
-            </ListItem>
+            </li>
           ))}
-        </OrderedList>
+        </ol>
       </CardBody>
     </Card>
   );

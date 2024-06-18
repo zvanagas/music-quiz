@@ -1,6 +1,6 @@
 import { SONG_NAME_LIMIT } from '@/config/constants';
 import { SelectedAnswer } from '@/types/events';
-import { GameStates } from '@/types/game-states';
+import { GameState } from '@/types/game-state';
 import { Button, Divider, ThemingProps } from '@chakra-ui/react';
 
 const colorSchemes: ThemingProps['colorScheme'][] = [
@@ -14,7 +14,7 @@ type AnswerProps = {
   index: number;
   selectedAnswer?: SelectedAnswer;
   fullSongName: string;
-  gameState: GameStates;
+  gameState: GameState;
   onClick: (song: string, index: number) => void;
 };
 
