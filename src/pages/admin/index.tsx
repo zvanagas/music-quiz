@@ -32,7 +32,7 @@ const AdminLogin = () => {
         onChange={(e) => setName(e.target.value)}
       />
       <button
-        className="py-2 px-4 rounded w-full bg-blue-700 mt-4"
+        className="py-2 px-4 rounded w-full bg-blue-700 mt-4 hover:bg-blue-600 transition-colors"
         onClick={handleCreate}
       >
         Create room

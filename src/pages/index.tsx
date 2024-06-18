@@ -58,7 +58,7 @@ const Name = () => {
         onChange={(e) => setName(e.target.value)}
       />
       <button
-        className="w-full bg-blue-800 mt-4 disabled:opacity-60 disabled:cursor-not-allowed rounded py-2 px-4"
+        className="w-full bg-blue-800 mt-4 disabled:opacity-60 disabled:cursor-not-allowed rounded py-2 px-4 hover:bg-blue-700 transition-colors"
         onClick={join}
         disabled={isLoading}
       >

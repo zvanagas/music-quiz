@@ -39,7 +39,7 @@ export const Admin = () => {
           onChange={({ target }) => setPlaylistId(target.value)}
         />
         <button
-          className="mt-4 bg-green-700 py-2 px-4 rounded disabled:opacity-60 disabled:cursor-not-allowed"
+          className="mt-4 bg-green-700 py-2 px-4 rounded disabled:opacity-60 disabled:cursor-not-allowed hover:bg-green-600 transition-colors"
           disabled={gameState === 'loading' || !players.length || !playlistId}
           onClick={startGame}
         >
@@ -78,7 +78,7 @@ export const Admin = () => {
         <Card>
           <CardBody>
             <button
-              className="py-2 px-4 rounded bg-red-800"
+              className="py-2 px-4 rounded bg-red-800 hover:bg-red-700 transition-colors"
               onClick={resetGame}
             >
               Reset

@@ -29,7 +29,7 @@ export const Config = ({ stages, onStagesUpdate }: ConfigProps) => {
           onChange={({ target }) => setStagesValue(Number(target.value))}
         />
         <button
-          className="py-2 px-4 bg-slate-600 rounded disabled:opacity-60 disabled:cursor-not-allowed"
+          className="py-2 px-4 bg-slate-600 rounded disabled:opacity-60 disabled:cursor-not-allowed hover:bg-slate-500 transition-colors"
           disabled={stages === stagesValue}
           onClick={() => onStagesUpdate(stagesValue)}
         >
