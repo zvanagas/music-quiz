@@ -1,6 +1,6 @@
 import { endpoints } from '@/config/endpoints';
 import { useSessionStorage } from '@/hooks/use-session-storage.hook';
-import { Button, Input } from '@chakra-ui/react';
+import { Input } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -31,9 +31,12 @@ const AdminLogin = () => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <Button width="full" colorScheme="blue" mt="4" onClick={handleCreate}>
+      <button
+        className="py-2 px-4 rounded w-full bg-blue-700 mt-4"
+        onClick={handleCreate}
+      >
         Create room
-      </Button>
+      </button>
     </div>
   );
 };

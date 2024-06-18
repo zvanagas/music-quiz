@@ -1,7 +1,7 @@
 'use client';
 
 import { Players } from '@/components/players';
-import { Button, Input } from '@chakra-ui/react';
+import { Input } from '@chakra-ui/react';
 import { GuessesLog } from '@/components/guesses-log';
 import { ConnectedPlayers } from '@/components/connected-players';
 import { StageInfo } from '@/components/stage-info';
@@ -38,14 +38,13 @@ export const Admin = () => {
           value={playlistId}
           onChange={({ target }) => setPlaylistId(target.value)}
         />
-        <Button
-          mt={4}
-          colorScheme="green"
-          isDisabled={gameState === 'loading' || !players.length || !playlistId}
+        <button
+          className="mt-4 bg-green-700 py-2 px-4 rounded disabled:opacity-60 disabled:cursor-not-allowed"
+          disabled={gameState === 'loading' || !players.length || !playlistId}
           onClick={startGame}
         >
           Start game!
-        </Button>
+        </button>
       </CardBody>
     </Card>
   );
@@ -78,9 +77,12 @@ export const Admin = () => {
       {gameState === 'finished' && (
         <Card>
           <CardBody>
-            <Button colorScheme="red" onClick={resetGame}>
+            <button
+              className="py-2 px-4 rounded bg-red-800"
+              onClick={resetGame}
+            >
               Reset
-            </Button>
+            </button>
           </CardBody>
         </Card>
       )}

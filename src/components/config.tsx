@@ -1,4 +1,4 @@
-import { Button, Input } from '@chakra-ui/react';
+import { Input } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Card } from './card/card';
 import { CardHeader } from './card/card-header';
@@ -28,12 +28,13 @@ export const Config = ({ stages, onStagesUpdate }: ConfigProps) => {
           value={stagesValue}
           onChange={({ target }) => setStagesValue(Number(target.value))}
         />
-        <Button
-          isDisabled={stages === stagesValue}
+        <button
+          className="py-2 px-4 bg-slate-600 rounded disabled:opacity-60 disabled:cursor-not-allowed"
+          disabled={stages === stagesValue}
           onClick={() => onStagesUpdate(stagesValue)}
         >
           Save
-        </Button>
+        </button>
       </CardBody>
     </Card>
   );

@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { Grid } from '@chakra-ui/react';
 import { Answer } from '@/components/answer';
 import { Leaderboard } from '@/components/leaderboard';
 import { PlayersWaiting } from '@/components/players-waiting';
@@ -45,7 +44,7 @@ export const Play = () => {
 
   const renderGuessContent = () => (
     <div className="flex flex-col items-center justify-center w-full h-full">
-      <Grid gridTemplateColumns="1fr 1fr" gap={4}>
+      <div className="grid grid-cols-2 gap-4">
         {answers.map((song, i) => (
           <Answer
             key={song}
@@ -56,7 +55,7 @@ export const Play = () => {
             onClick={guess}
           />
         ))}
-      </Grid>
+      </div>
     </div>
   );
 

@@ -1,13 +1,12 @@
 import { SONG_NAME_LIMIT } from '@/config/constants';
 import { SelectedAnswer } from '@/types/events';
 import { GameState } from '@/types/game-state';
-import { Button, Divider, ThemingProps } from '@chakra-ui/react';
 
-const colorSchemes: ThemingProps['colorScheme'][] = [
-  'blue',
-  'yellow',
-  'green',
-  'red',
+const colorSchemes = [
+  'bg-blue-600 hover:bg-blue-500',
+  'bg-yellow-600 hover:bg-yellow-500',
+  'bg-green-600 hover:bg-green-500',
+  'bg-red-600 hover:bg-red-500',
 ];
 
 type AnswerProps = {
@@ -34,22 +33,17 @@ export const Answer = ({
   const opacity =
     (selectedAnswer && selectedAnswer.answer !== fullSongName) ||
     gameState !== 'guessing'
-      ? 0.2
-      : 0.8;
+      ? 'disabled:opacity-20'
+      : 'disabled:opaicty-80';
   return (
-    <Button
-      size="xl"
-      display="flex"
-      overflow="hidden"
-      flexDirection="column"
-      _disabled={{ opacity }}
-      isDisabled={!!selectedAnswer || gameState !== 'guessing'}
-      colorScheme={colorSchemes[index]}
+    <button
+      className={`flex flex-col items-center overflow-hidden rounded py-10 transition-colors ${opacity} ${colorSchemes[index]}`}
+      disabled={!!selectedAnswer || gameState !== 'guessing'}
       onClick={() => onClick(fullSongName, index)}
     >
       <p className="px-2">{artist}</p>
-      <Divider bgColor="black" my={2} height={1} />
+      <hr className="opacity-20 w-full h-1 bg-slate-800 my-2" />
       <p className="px-2 break-words">{songName}</p>
-    </Button>
+    </button>
   );
 };

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSessionStorage } from '@/hooks/use-session-storage.hook';
 import { useRouter } from 'next/router';
-import { Button, Input } from '@chakra-ui/react';
+import { Input } from '@chakra-ui/react';
 import { Logo } from '@/components/logo';
 import { endpoints } from '@/config/endpoints';
 import { useToast } from '@/contexts/toast-provider';
@@ -57,15 +57,13 @@ const Name = () => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <Button
-        width="full"
-        colorScheme="blue"
-        mt="4"
+      <button
+        className="w-full bg-blue-800 mt-4 disabled:opacity-60 disabled:cursor-not-allowed rounded py-2 px-4"
         onClick={join}
-        isDisabled={isLoading}
+        disabled={isLoading}
       >
         Join
-      </Button>
+      </button>
     </div>
   );
 };

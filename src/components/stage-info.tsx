@@ -1,5 +1,4 @@
 import { GameState } from '@/types/game-state';
-import { Divider, Button } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Card } from './card/card';
 import { CardHeader } from './card/card-header';
@@ -43,7 +42,7 @@ export const StageInfo = ({
           {gameState === 'guessing' && <p>GUESS: {guessCountdown}s</p>}
           {['waiting', 'guessing'].includes(gameState) && (
             <div>
-              <Divider my={2} />
+              <hr className="opacity-20 w-full h-1 bg-slate-800 my-2" />
               <p>Possible answers:</p>
               <ol className="list-decimal ms-4">
                 {stageAnswers.map((answer) => (
@@ -63,9 +62,12 @@ export const StageInfo = ({
             </div>
           )}
           {!['idle', 'loading'].includes(gameState) && (
-            <Button onClick={() => setIsAnswerShown(!isAnswerShown)}>
+            <button
+              className="bg-slate-600 rounded p-2"
+              onClick={() => setIsAnswerShown(!isAnswerShown)}
+            >
               {isAnswerShown ? 'Hide answer' : 'Show answer'}
-            </Button>
+            </button>
           )}
         </div>
       </CardBody>
