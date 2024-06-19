@@ -77,6 +77,7 @@ export const useAdmin = () => {
     // currentStageSong.currentTime = rand;
     currentStageSong.volume = 1;
     currentStageSong.play();
+    setLeaderboard(leaderboard.map((item) => ({ ...item, plusPoints: 0 })));
     startGuessCountdown(GUESS_TIME);
     setGameState('guessing');
   };
