@@ -63,4 +63,6 @@ export default function SocketHandler(
       io.sockets.emit(Events.Players, Object.values(clients));
     });
   });
+
+  res.status(200).end();
 }

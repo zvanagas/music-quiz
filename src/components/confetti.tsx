@@ -101,7 +101,7 @@ export const Confetti = () => {
   };
 
   return (
-    <div className="flex justify-center items-center absolute w-full h-full z-1000 pointer-events-none">
+    <div className="flex justify-center items-center absolute top-0 overflow-hidden w-full h-full z-1000 pointer-events-none">
       {confettiStyles.map((style, index) => (
         <div
           key={index}
