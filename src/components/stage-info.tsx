@@ -69,7 +69,7 @@ export const StageInfo = ({
           )}
           {!['idle', 'loading'].includes(gameState) && (
             <button
-              className="bg-slate-600 rounded p-2 hover:bg-slate-500 transition-colors text-white"
+              className="bg-neutral-600 rounded p-2 hover:bg-neutral-500 transition-colors text-white"
               onClick={() => setIsAnswerShown(!isAnswerShown)}
             >
               {isAnswerShown ? 'Hide answer' : 'Show answer'}
