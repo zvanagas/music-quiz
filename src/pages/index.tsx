@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useSessionStorage } from '@/hooks/use-session-storage.hook';
 import { useRouter } from 'next/router';
-import { Input } from '@chakra-ui/react';
 import { Logo } from '@/components/logo';
 import { endpoints } from '@/config/endpoints';
 import { useToast } from '@/contexts/toast-provider';

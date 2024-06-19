@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Card } from './card/card';
 import { CardHeader } from './card/card-header';
-import { CardBody } from './card/card-body';
 import { Heading } from './heading';
 
 type ConfigProps = {
