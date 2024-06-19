@@ -12,10 +12,12 @@ export const Players = ({ players }: PlayersProps) => {
   return (
     <Card>
       <CardHeader>
-        <Heading>Leaderboard</Heading>
+        <Heading>
+          <p className="text-white">Leaderboard</p>
+        </Heading>
       </CardHeader>
       <CardBody>
-        <ol className="list-decimal ms-4">
+        <ol className="list-decimal ms-4 text-white">
           {players.map((it, i) => (
             <li key={i}>
               {it.name} {it.score} points

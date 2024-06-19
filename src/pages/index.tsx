@@ -45,20 +45,20 @@ const Name = () => {
   return (
     <div className="flex flex-col items-center justify-center px-10 h-full">
       <Logo />
-      <p className="mt-10">Room ID</p>
-      <Input
-        borderColor="white"
+      <p className="mt-10 text-white">Room ID</p>
+      <input
+        className="w-full h-10 rounded bg-transparent border text-white px-4"
         value={roomId}
         onChange={(e) => setRoomId(e.target.value)}
       />
-      <p>Name</p>
-      <Input
-        borderColor="white"
+      <p className="text-white">Name</p>
+      <input
+        className="w-full h-10 rounded bg-transparent border text-white px-4"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <button
-        className="w-full bg-blue-800 mt-4 disabled:opacity-60 disabled:cursor-not-allowed rounded py-2 px-4 hover:bg-blue-700 transition-colors"
+        className="w-full bg-blue-800 mt-4 disabled:opacity-60 disabled:cursor-not-allowed rounded py-2 px-4 hover:bg-blue-700 transition-colors text-white"
         onClick={join}
         disabled={isLoading}
       >

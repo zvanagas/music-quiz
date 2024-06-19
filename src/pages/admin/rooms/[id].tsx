@@ -38,7 +38,7 @@ const AdminWithSocket = () => {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <p className="text-white">Loading...</p>;
   }
 
   return (

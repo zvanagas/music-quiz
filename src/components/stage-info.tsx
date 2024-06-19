@@ -30,21 +30,27 @@ export const StageInfo = ({
     <Card>
       <CardHeader>
         <Heading>
-          Stage {stage}/{stages}
+          <p className="text-white">
+            Stage {stage}/{stages}
+          </p>
         </Heading>
       </CardHeader>
       <CardBody>
         <div className="flex flex-col gap-4">
           {['idle', 'loading'].includes(gameState) && (
-            <p>Waiting for game to start...</p>
+            <p className="text-white">Waiting for game to start...</p>
           )}
-          {gameState === 'waiting' && <p>WAIT: {countdown}s</p>}
-          {gameState === 'guessing' && <p>GUESS: {guessCountdown}s</p>}
+          {gameState === 'waiting' && (
+            <p className="text-white">WAIT: {countdown}s</p>
+          )}
+          {gameState === 'guessing' && (
+            <p className="text-white">GUESS: {guessCountdown}s</p>
+          )}
           {['waiting', 'guessing'].includes(gameState) && (
             <div>
               <hr className="opacity-20 w-full h-1 bg-slate-800 my-2" />
-              <p>Possible answers:</p>
-              <ol className="list-decimal ms-4">
+              <p className="text-white">Possible answers:</p>
+              <ol className="list-decimal ms-4 text-white">
                 {stageAnswers.map((answer) => (
                   <li key={answer}>
                     <p
@@ -63,7 +69,7 @@ export const StageInfo = ({
           )}
           {!['idle', 'loading'].includes(gameState) && (
             <button
-              className="bg-slate-600 rounded p-2 hover:bg-slate-500 transition-colors"
+              className="bg-slate-600 rounded p-2 hover:bg-slate-500 transition-colors text-white"
               onClick={() => setIsAnswerShown(!isAnswerShown)}
             >
               {isAnswerShown ? 'Hide answer' : 'Show answer'}

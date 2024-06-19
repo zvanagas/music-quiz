@@ -23,7 +23,7 @@ export const Logo = () => {
 
   return (
     <div
-      className={`flex items-center justify-center rounded-3xl text-xl w-40 h-40 transition-colors duration-700 ease-in-out animate-rotation ${color}`}
+      className={`flex items-center justify-center rounded-3xl text-xl w-40 h-40 text-white transition-colors duration-700 ease-in-out animate-rotation ${color}`}
     >
       MuziQ
     </div>

@@ -11,10 +11,12 @@ export const ConnectedPlayers = ({ players }: ConnectedPlayersProps) => {
   return (
     <Card>
       <CardHeader>
-        <Heading>Connected players</Heading>
+        <Heading>
+          <p className="text-white">Connected players</p>
+        </Heading>
       </CardHeader>
       <CardBody>
-        <ol className="list-decimal ms-4">
+        <ol className="list-decimal ms-4 text-white">
           {players.map((player, i) => (
             <li key={`${player}-${i}`}>{player}</li>
           ))}

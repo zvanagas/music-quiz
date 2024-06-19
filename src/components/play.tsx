@@ -63,7 +63,7 @@ export const Play = () => {
     const streak = leaderboard.find((it) => it.name === user)?.streak;
 
     return (
-      <div className="px-2 text-center">
+      <div className="px-2 text-center text-white">
         <p>
           <span className="font-extrabold">Answer:</span> {prevRoundAnswer}{' '}
           {!!selectedAnswer?.answer &&
@@ -84,12 +84,12 @@ export const Play = () => {
     return (
       <div className="flex flex-col items-center gap-4 py-8 h-full">
         {gameState !== 'finished' && (
-          <p className="text-4xl">
+          <p className="text-4xl text-white">
             Stage: {currentStage}/{stages}
           </p>
         )}
         {gameState !== 'finished' && (
-          <h2 className="text-xl text-center">
+          <h2 className="text-xl text-center text-white">
             {currCountdown || 'Waiting...'}
           </h2>
         )}

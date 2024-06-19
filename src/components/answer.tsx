@@ -37,13 +37,13 @@ export const Answer = ({
       : 'disabled:opaicty-80';
   return (
     <button
-      className={`flex flex-col items-center overflow-hidden rounded py-10 transition-colors ${opacity} ${colorSchemes[index]}`}
+      className={`flex flex-col items-center justify-center overflow-hidden rounded text-white transition-colors w-40 h-40 select-none ${opacity} ${colorSchemes[index]}`}
       disabled={!!selectedAnswer || gameState !== 'guessing'}
       onClick={() => onClick(fullSongName, index)}
     >
-      <p className="px-2">{artist}</p>
+      <p className="px-2 text-white">{artist}</p>
       <hr className="opacity-20 w-full h-1 bg-slate-800 my-2" />
-      <p className="px-2 break-words">{songName}</p>
+      <p className="px-2 break-words text-white">{songName}</p>
     </button>
   );
 };

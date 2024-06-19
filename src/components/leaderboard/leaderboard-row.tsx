@@ -50,14 +50,14 @@ export const LeaderboardRow = ({
           : undefined
       }
     >
-      <div className="flex items-center gap-0.5">
+      <div className="flex items-center gap-0.5 text-white">
         <p>{place}.</p>
         <div className="flex items-center gap-0.5">
           <Avatar name={name} />
           <p className="font-bold">{name}</p>
         </div>
       </div>
-      <p className="font-bold">
+      <p className="font-bold text-white">
         {score} {plusPoints > 0 && ` (+${plusPoints})`}
       </p>
     </div>

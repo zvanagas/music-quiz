@@ -1,7 +1,6 @@
 'use client';
 
 import { Players } from '@/components/players';
-import { Input } from '@chakra-ui/react';
 import { GuessesLog } from '@/components/guesses-log';
 import { ConnectedPlayers } from '@/components/connected-players';
 import { StageInfo } from '@/components/stage-info';
@@ -32,27 +31,30 @@ export const Admin = () => {
 
   const renderStartGameCards = () => (
     <Card>
-      <CardBody>
-        <p>Spotify Playlist ID</p>
-        <Input
+      <div className="flex flex-col items-start flex-1 p-5 gap-2">
+        <p className="text-white">Spotify Playlist ID</p>
+        <input
+          className="w-full h-10 rounded bg-transparent border text-white px-4"
           value={playlistId}
           onChange={({ target }) => setPlaylistId(target.value)}
         />
         <button
-          className="mt-4 bg-green-700 py-2 px-4 rounded disabled:opacity-60 disabled:cursor-not-allowed hover:bg-green-600 transition-colors"
+          className="bg-green-700 py-2 px-4 rounded disabled:opacity-60 disabled:cursor-not-allowed hover:bg-green-600 transition-colors text-white"
           disabled={gameState === 'loading' || !players.length || !playlistId}
           onClick={startGame}
         >
           Start game!
         </button>
-      </CardBody>
+      </div>
     </Card>
   );
 
   return (
     <div className="flex flex-col p-4 gap-4 flex-wrap justify-center">
       <Card>
-        <CardBody>Room ID: {roomId}</CardBody>
+        <CardBody>
+          <p className="text-white">Room ID: {roomId}</p>
+        </CardBody>
       </Card>
       {['idle', 'loading'].includes(gameState) && renderStartGameCards()}
       {['idle', 'loading'].includes(gameState) && (
@@ -78,7 +80,7 @@ export const Admin = () => {
         <Card>
           <CardBody>
             <button
-              className="py-2 px-4 rounded bg-red-800 hover:bg-red-700 transition-colors"
+              className="py-2 px-4 rounded bg-red-800 hover:bg-red-700 transition-colors text-white"
               onClick={resetGame}
             >
               Reset

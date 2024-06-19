@@ -12,11 +12,13 @@ export const GuessesLog = ({ guesses }: GuessesLogProps) => {
   return (
     <Card>
       <CardHeader>
-        <Heading>Guesses</Heading>
+        <Heading>
+          <p className="text-white">Guesses</p>
+        </Heading>
       </CardHeader>
       <CardBody>
         <div className="max-h-[400px] overflow-y-auto">
-          <ul className="list-disc ms-4">
+          <ul className="list-disc ms-4 text-white">
             {guesses.map((it) => (
               <li key={`${it.name}-${it.answer}`}>
                 {it.name} guessed {it.answer} (Points {it.points})

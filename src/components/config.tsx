@@ -1,4 +1,3 @@
-import { Input } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Card } from './card/card';
 import { CardHeader } from './card/card-header';
@@ -20,22 +19,25 @@ export const Config = ({ stages, onStagesUpdate }: ConfigProps) => {
   return (
     <Card>
       <CardHeader>
-        <Heading>Config</Heading>
+        <Heading>
+          <p className="text-white">Config</p>
+        </Heading>
       </CardHeader>
-      <CardBody>
-        <div>Stages</div>
-        <Input
+      <div className="flex flex-col items-start flex-1 p-5 gap-2">
+        <div className="text-white">Stages</div>
+        <input
+          className="w-full h-10 rounded bg-transparent border text-white px-4"
           value={stagesValue}
           onChange={({ target }) => setStagesValue(Number(target.value))}
         />
         <button
-          className="py-2 px-4 bg-slate-600 rounded disabled:opacity-60 disabled:cursor-not-allowed hover:bg-slate-500 transition-colors"
+          className="py-2 px-4 bg-slate-600 rounded disabled:opacity-60 disabled:cursor-not-allowed hover:bg-slate-500 transition-colors text-white"
           disabled={stages === stagesValue}
           onClick={() => onStagesUpdate(stagesValue)}
         >
           Save
         </button>
-      </CardBody>
+      </div>
     </Card>
   );
 };

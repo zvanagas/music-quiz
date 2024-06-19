@@ -17,7 +17,7 @@ export const PlayerBox = ({ name }: PlayerBoxProps) => {
       className={`w-36 h-36 flex flex-col items-center justify-center rounded-3xl m-4 gap-2 ${colors[0]}`}
     >
       <Avatar name={name} />
-      <p>{name}</p>
+      <p className="text-white">{name}</p>
     </div>
   );
 };

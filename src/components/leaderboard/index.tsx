@@ -14,7 +14,7 @@ export const Leaderboard = ({
 }: LeaderboardProps) => {
   return (
     <div className="flex flex-col self-center gap-2 w-[90%]">
-      <p className="text-center font-extrabold text-2xl">
+      <p className="text-center font-extrabold text-2xl text-white">
         {isGameFinished ? 'Final Results' : 'Results'}
       </p>
       {scores.map((player, index) => (

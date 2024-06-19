@@ -10,7 +10,7 @@ export const Avatar = ({ name }: AvatarProps) => {
 
   return (
     <div
-      className={`flex items-center justify-center w-12 h-12 mx-2 rounded-full ${getColorName(
+      className={`flex items-center justify-center w-12 h-12 mx-2 rounded-full text-white ${getColorName(
         code
       )}`}
     >
