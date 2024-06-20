@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 type CountdownStates = 'idle' | 'running' | 'finished';
 
 export const useCountdown = (onCountdownFinish?: () => void) => {
-  const [countdown, setCountdown] = useState(0);
+  const [countdown, setCountdown] = useState<number>(0);
   const [countdownState, setCountdownState] = useState<CountdownStates>('idle');
 
   const startCountdown = useCallback((count: number) => {

@@ -19,9 +19,9 @@ export const usePlay = () => {
   const [user] = useSessionStorage('user');
   const [answers, setAnswers] = useState<string[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer>();
-  const [currentStage, setCurrentStage] = useState(0);
+  const [currentStage, setCurrentStage] = useState<number>(0);
   const [gameState, setGameState] = useState<GameState>('idle');
-  const [prevRoundAnswer, setPrevRoundAnswer] = useState('');
+  const [prevRoundAnswer, setPrevRoundAnswer] = useState<string>('');
   const [players, setPlayers] = useState<string[]>([]);
   const [guessingStartTime, setGuessingStartTime] = useState<number>(0);
   const [leaderboard, setLeaderboard] = useState<PlayerData[]>([]);

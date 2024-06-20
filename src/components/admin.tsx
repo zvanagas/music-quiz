@@ -1,5 +1,3 @@
-'use client';
-
 import { Players } from '@/components/players';
 import { GuessesLog } from '@/components/guesses-log';
 import { ConnectedPlayers } from '@/components/connected-players';

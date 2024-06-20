@@ -9,7 +9,7 @@ type ConfigProps = {
 };
 
 export const Config = ({ stages, onStagesUpdate }: ConfigProps) => {
-  const [stagesValue, setStagesValue] = useState(stages);
+  const [stagesValue, setStagesValue] = useState<number>(stages);
 
   useEffect(() => {
     setStagesValue(stages);

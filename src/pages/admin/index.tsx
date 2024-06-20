@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 const AdminLogin = () => {
   const router = useRouter();
-  const [name, setName] = useState('');
+  const [name, setName] = useState<string>('');
   const [_, setUser] = useSessionStorage('user');
 
   const handleCreate = async () => {
