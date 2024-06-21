@@ -12,7 +12,7 @@ const ToastContext = createContext<{
 export const useToast = () => useContext(ToastContext);
 
 export const ToastProvider = ({ children }: PropsWithChildren) => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState<string>('');
   const [type, setType] = useState<'success' | 'error' | undefined>(undefined);
   const show = (
     message: string,

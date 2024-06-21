@@ -1,5 +1,3 @@
-'use client';
-
 import { SocketProvider } from '@/contexts/socket-provider';
 import { Admin } from '@/components/admin';
 import { useSessionStorage } from '@/hooks/use-session-storage.hook';
