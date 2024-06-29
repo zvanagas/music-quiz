@@ -1,4 +1,4 @@
-import { date, integer, pgTable, text } from 'drizzle-orm/pg-core';
+import { integer, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
 export const config = pgTable('config', {
   name: text('name'),
@@ -8,5 +8,5 @@ export const config = pgTable('config', {
 export const rooms = pgTable('rooms', {
   id: integer('id'),
   userName: text('userName'),
-  createdAt: date('createdAt').defaultNow(),
+  createdAt: timestamp('createdAt').defaultNow(),
 });
