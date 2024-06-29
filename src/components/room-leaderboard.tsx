@@ -81,6 +81,13 @@ export const RoomLeaderboard = ({ roomId }: Props) => {
           )}
         </div>
       </Card>
+      {gameState === 'loading' && (
+        <Card>
+          <div className="flex justify-center p-5 text-white text-xl">
+            Loading...
+          </div>
+        </Card>
+      )}
       {(gameState === 'waiting' || gameState === 'guessing') && (
         <Card>
           <div className="flex items-center justify-center p-5 text-xl">
