@@ -223,6 +223,7 @@ export const useAdmin = () => {
     guessCountdown,
     currentStageAnswers,
     playlistId,
+    leaderboard,
     setPlaylistId,
     stages: config.stages,
     roomId: query.id,

@@ -11,10 +11,11 @@ const colorSchemes = [
 
 type AnswerProps = {
   index: number;
-  selectedAnswer?: SelectedAnswer;
   fullSongName: string;
   gameState: GameState;
-  onClick: (song: string, index: number) => void;
+  isDisabled?: boolean;
+  selectedAnswer?: SelectedAnswer;
+  onClick?: (song: string, index: number) => void;
 };
 
 export const Answer = ({
@@ -22,6 +23,7 @@ export const Answer = ({
   selectedAnswer,
   fullSongName,
   gameState,
+  isDisabled,
   onClick,
 }: AnswerProps) => {
   const [artist, ...song] = fullSongName.split(' - ');
@@ -38,8 +40,8 @@ export const Answer = ({
   return (
     <button
       className={`flex flex-col items-center justify-center overflow-hidden rounded text-white transition-colors w-40 h-40 select-none ${opacity} ${colorSchemes[index]}`}
-      disabled={!!selectedAnswer || gameState !== 'guessing'}
-      onClick={() => onClick(fullSongName, index)}
+      disabled={isDisabled}
+      onClick={() => onClick?.(fullSongName, index)}
     >
       <p className="px-2 text-white">{artist}</p>
       <hr className="opacity-20 w-full h-1 bg-slate-800 my-2" />
