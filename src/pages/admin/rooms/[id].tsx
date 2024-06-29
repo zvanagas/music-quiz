@@ -7,7 +7,7 @@ import { endpoints } from '@/config/endpoints';
 
 const AdminWithSocket = () => {
   const [user] = useSessionStorage('user');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const router = useRouter();
 
   const roomId = router.query.id;
