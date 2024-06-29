@@ -1,10 +1,10 @@
-import { RoomLeaderboard } from '@/components/room-leaderboard';
+import { RoomView } from '@/components/room-view';
 import { SocketProvider } from '@/contexts/socket-provider';
 import { useAdmin } from '@/hooks/use-admin.hook';
 import { useSessionStorage } from '@/hooks/use-session-storage.hook';
 import { useRouter } from 'next/router';
 
-const RoomLeaderboardWithSocket = () => {
+const RoomViewWithSocket = () => {
   const router = useRouter();
   const [user] = useSessionStorage('user');
   const {} = useAdmin();
@@ -20,9 +20,9 @@ const RoomLeaderboardWithSocket = () => {
       user={user}
       type="admin"
     >
-      <RoomLeaderboard roomId={Array.isArray(roomId) ? roomId[0] : roomId} />
+      <RoomView roomId={Array.isArray(roomId) ? roomId[0] : roomId} />
     </SocketProvider>
   );
 };
 
-export default RoomLeaderboardWithSocket;
+export default RoomViewWithSocket;

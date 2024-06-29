@@ -10,7 +10,7 @@ type Props = {
   roomId: string;
 };
 
-export const RoomLeaderboard = ({ roomId }: Props) => {
+export const RoomView = ({ roomId }: Props) => {
   const {
     gameState,
     players,
