@@ -11,10 +11,10 @@ import { GameState } from '@/types/game-state';
 import { loadSongs, loadSong } from '@/utils';
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useCountdown } from './use-countdown.hook';
-import { Song } from '@/types/song';
 import { useConfig } from './use-config.hook';
 import { endpoints } from '@/config/endpoints';
 import { useRouter } from 'next/router';
+import { SpotifyPlaylist } from '@/lib/spotify/types';
 
 export const useAdmin = () => {
   const [loadedSongs, setLoadedSongs] = useState<HTMLAudioElement[]>([]);
@@ -153,17 +153,17 @@ export const useAdmin = () => {
 
   const startGame = useCallback(async () => {
     setGameState('loading');
-    let currentSongs: Song[] = await (
+    const spotify: SpotifyPlaylist = await (
       await fetch(`${endpoints.spotify}?id=${playlistId}`)
     ).json();
 
-    if (!currentSongs.length) {
+    if (!spotify.songs.length) {
       setGameState('idle');
       return;
     }
 
     const { answers, songList } = await loadSongs(
-      currentSongs,
+      spotify.songs,
       config.stages,
       true
     );
