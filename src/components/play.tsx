@@ -52,6 +52,7 @@ export const Play = () => {
             fullSongName={song}
             selectedAnswer={selectedAnswer}
             gameState={gameState}
+            isDisabled={!!selectedAnswer || gameState !== 'guessing'}
             onClick={guess}
           />
         ))}

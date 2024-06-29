@@ -6,8 +6,8 @@ type LeaderboardRowProps = {
   name: string;
   score: number;
   plusPoints: number;
-  isYours: boolean;
   totalRowsCount: number;
+  isYours?: boolean;
   shouldAppear?: boolean;
   style?: CSSProperties;
 };

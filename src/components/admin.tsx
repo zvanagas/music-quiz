@@ -6,6 +6,8 @@ import { useAdmin } from '@/hooks/use-admin.hook';
 import { Config } from './config';
 import { Card } from './card/card';
 import { CardBody } from './card/card-body';
+import { GameStartCard } from './game-start-card';
+import { useRouter } from 'next/router';
 
 export const Admin = () => {
   const {
@@ -26,35 +28,31 @@ export const Admin = () => {
     roomId,
     handleStagesUpdate,
   } = useAdmin();
-
-  const renderStartGameCards = () => (
-    <Card>
-      <div className="flex flex-col items-start flex-1 p-5 gap-2">
-        <p className="text-white">Spotify Playlist ID</p>
-        <input
-          className="w-full h-10 rounded bg-transparent border text-white px-4"
-          value={playlistId}
-          onChange={({ target }) => setPlaylistId(target.value)}
-        />
-        <button
-          className="bg-green-700 py-2 px-4 rounded disabled:opacity-60 disabled:cursor-not-allowed hover:bg-green-600 transition-colors text-white"
-          disabled={gameState === 'loading' || !players.length || !playlistId}
-          onClick={startGame}
-        >
-          Start game!
-        </button>
-      </div>
-    </Card>
-  );
+  const { push } = useRouter();
 
   return (
     <div className="flex flex-col p-4 gap-4 flex-wrap justify-center">
       <Card>
-        <CardBody>
+        <div className="flex flex-1 items-center justify-between p-5">
           <p className="text-white">Room ID: {roomId}</p>
-        </CardBody>
+          <button
+            className="py-2 px-4 bg-green-600 rounded disabled:opacity-60 disabled:cursor-not-allowed hover:bg-green-500 transition-colors text-white"
+            onClick={() => push(`/rooms/${roomId}/leaderboard`)}
+          >
+            View
+          </button>
+        </div>
       </Card>
-      {['idle', 'loading'].includes(gameState) && renderStartGameCards()}
+      {['idle', 'loading'].includes(gameState) && (
+        <GameStartCard
+          playlistId={playlistId}
+          isStartDisabled={
+            gameState === 'loading' || !players.length || !playlistId
+          }
+          setPlaylistId={setPlaylistId}
+          onStart={startGame}
+        />
+      )}
       {['idle', 'loading'].includes(gameState) && (
         <Config stages={stages} onStagesUpdate={handleStagesUpdate} />
       )}
