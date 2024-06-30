@@ -12,9 +12,9 @@ type RoomData = {
   createdAt: string;
 };
 
-const Name = () => {
+const Login = () => {
   const [name, setName] = useState<string>('');
-  const [roomId, setRoomId] = useState<number>();
+  const [roomId, setRoomId] = useState<string>('');
   const [rooms, setRooms] = useState<RoomData[]>([]);
   const [_, setUser] = useSessionStorage('user');
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -69,22 +69,22 @@ const Name = () => {
           {rooms.map((room) => (
             <button
               className={`flex items-center gap-1 rounded-xl text-white cursor-pointer ${
-                roomId === room.id ? 'bg-slate-800' : 'bg-slate-900'
+                Number(roomId) === room.id ? 'bg-slate-800' : 'bg-slate-900'
               } hover:bg-slate-700 border border-slate-500 px-2 py-1`}
               key={room.id}
-              onClick={() => setRoomId(room.id)}
+              onClick={() => setRoomId(room.id.toString())}
             >
               <span>
                 {room.id} (by {room.userName})
               </span>
-              {roomId === room.id && <CheckIcon />}
+              {Number(roomId) === room.id && <CheckIcon />}
             </button>
           ))}
         </div>
         <input
           className="w-full h-10 rounded bg-transparent border text-white px-4"
           value={roomId}
-          onChange={(e) => setRoomId(Number(e.target.value))}
+          onChange={(e) => setRoomId(e.target.value)}
         />
       </div>
       <p className="text-white">Name</p>
@@ -104,4 +104,4 @@ const Name = () => {
   );
 };
 
-export default Name;
+export default Login;
