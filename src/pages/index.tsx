@@ -60,42 +60,33 @@ const Name = () => {
     fetchRooms();
   }, []);
 
-  const renderRoomSelection = () => {
-    if (!rooms.length) {
-      return (
+  return (
+    <div className="flex flex-col items-center justify-center px-10 h-full">
+      <Logo />
+      <p className="mt-10 text-white">Room ID</p>
+      <div className="flex flex-col items-center gap-2 w-full">
+        <div className="flex flex-wrap gap-2">
+          {rooms.map((room) => (
+            <button
+              className={`flex items-center gap-1 rounded-xl text-white cursor-pointer ${
+                roomId === room.id ? 'bg-slate-800' : 'bg-slate-900'
+              } hover:bg-slate-700 border border-slate-500 px-2 py-1`}
+              key={room.id}
+              onClick={() => setRoomId(room.id)}
+            >
+              <span>
+                {room.id} (by {room.userName})
+              </span>
+              {roomId === room.id && <CheckIcon />}
+            </button>
+          ))}
+        </div>
         <input
           className="w-full h-10 rounded bg-transparent border text-white px-4"
           value={roomId}
           onChange={(e) => setRoomId(Number(e.target.value))}
         />
-      );
-    }
-
-    return (
-      <div className="flex flex-wrap gap-2">
-        {rooms.map((room) => (
-          <button
-            className={`flex items-center gap-1 rounded-xl text-white cursor-pointer ${
-              roomId === room.id ? 'bg-slate-800' : 'bg-slate-900'
-            } hover:bg-slate-700 border border-slate-500 px-2 py-1`}
-            key={room.id}
-            onClick={() => setRoomId(room.id)}
-          >
-            <span>
-              {room.id} (by {room.userName})
-            </span>
-            {roomId === room.id && <CheckIcon />}
-          </button>
-        ))}
       </div>
-    );
-  };
-
-  return (
-    <div className="flex flex-col items-center justify-center px-10 h-full">
-      <Logo />
-      <p className="mt-10 text-white">Room ID</p>
-      {renderRoomSelection()}
       <p className="text-white">Name</p>
       <input
         className="w-full h-10 rounded bg-transparent border text-white px-4"
