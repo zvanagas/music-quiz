@@ -5,17 +5,12 @@ import { Logo } from '@/components/logo';
 import { endpoints } from '@/config/endpoints';
 import { useToast } from '@/contexts/toast-provider';
 import { CheckIcon } from '@/icons/check';
-
-type RoomData = {
-  id: number;
-  userName: string;
-  createdAt: string;
-};
+import { Room } from '@/lib/db/rooms/types';
 
 const Login = () => {
   const [name, setName] = useState<string>('');
   const [roomId, setRoomId] = useState<string>('');
-  const [rooms, setRooms] = useState<RoomData[]>([]);
+  const [rooms, setRooms] = useState<Room[]>([]);
   const [_, setUser] = useSessionStorage('user');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { show } = useToast();
@@ -51,8 +46,8 @@ const Login = () => {
 
   useEffect(() => {
     async function fetchRooms() {
-      const availableRooms: RoomData[] = await fetch(endpoints.rooms).then(
-        (res) => res.json()
+      const availableRooms: Room[] = await fetch(endpoints.rooms).then((res) =>
+        res.json()
       );
       setRooms(availableRooms);
     }
@@ -72,7 +67,7 @@ const Login = () => {
                 Number(roomId) === room.id ? 'bg-slate-800' : 'bg-slate-900'
               } hover:bg-slate-700 border border-slate-500 px-2 py-1`}
               key={room.id}
-              onClick={() => setRoomId(room.id.toString())}
+              onClick={() => room.id && setRoomId(room.id.toString())}
             >
               <span>
                 {room.id} (by {room.userName})

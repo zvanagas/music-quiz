@@ -1,7 +1,4 @@
-import { db } from '@/lib/db/drizzle';
-import { rooms } from '@/lib/db/schema';
-import { subHours } from 'date-fns';
-import { gt } from 'drizzle-orm';
+import { createRoom, getActiveRooms } from '@/lib/db/rooms';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
@@ -9,25 +6,16 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'GET') {
-    const createdRooms = await db
-      .select()
-      .from(rooms)
-      .where(gt(rooms.createdAt, subHours(new Date(), 1)));
+    const activeRooms = await getActiveRooms();
 
-    res.status(200).json(createdRooms);
+    res.status(200).json(activeRooms);
     return;
   } else if (req.method === 'POST') {
     const body = JSON.parse(req.body);
 
-    if (!body.name) {
-      res.status(400).end();
-      return;
-    }
-
-    const id = Math.floor(100000 + Math.random() * 900000);
-
     try {
-      await db.insert(rooms).values({ id, userName: body.name });
+      const id = await createRoom(body);
+
       res.status(201).json({ id });
       return;
     } catch {
