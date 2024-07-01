@@ -1,13 +1,15 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useSessionStorage } from '@/hooks/use-session-storage.hook';
-import { useRouter } from 'next/router';
 import { Logo } from '@/components/logo';
-import { endpoints } from '@/config/endpoints';
 import { useToast } from '@/contexts/toast-provider';
 import { CheckIcon } from '@/icons/check';
 import { Room } from '@/lib/db/rooms/types';
+import { useRouter } from 'next/navigation';
+import { endpoints } from '@/config/endpoints';
 
-const Login = () => {
+export default function Login() {
   const [name, setName] = useState<string>('');
   const [roomId, setRoomId] = useState<string>('');
   const [rooms, setRooms] = useState<Room[]>([]);
@@ -97,6 +99,4 @@ const Login = () => {
       </button>
     </div>
   );
-};
-
-export default Login;
+}

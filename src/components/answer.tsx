@@ -36,7 +36,7 @@ export const Answer = ({
     (selectedAnswer && selectedAnswer.answer !== fullSongName) ||
     gameState !== 'guessing'
       ? 'disabled:opacity-20'
-      : 'disabled:opaicty-80';
+      : 'disabled:opacity-80';
   return (
     <button
       className={`flex flex-col items-center justify-center overflow-hidden rounded text-white transition-colors w-40 h-40 select-none ${opacity} ${colorSchemes[index]}`}

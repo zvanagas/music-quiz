@@ -10,14 +10,14 @@ export const getActiveRooms = (): Promise<Room[]> =>
     .from(rooms)
     .where(gt(rooms.createdAt, subHours(new Date(), 1)));
 
-export const createRoom = async (data: { name?: string }): Promise<number> => {
-  if (!data.name) {
+export const createRoom = async (userName?: string): Promise<number> => {
+  if (!userName) {
     throw new Error('Name is missing!');
   }
 
   const id = Math.floor(100000 + Math.random() * 900000);
 
-  await db.insert(rooms).values({ id, userName: data.name });
+  await db.insert(rooms).values({ id, userName });
 
   return id;
 };

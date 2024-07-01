@@ -1,14 +1,15 @@
+'use client';
+
 import {
   createContext,
   PropsWithChildren,
-  useCallback,
   useContext,
   useEffect,
   useState,
 } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { SocketEvents } from '@/types/events';
-import { endpoints } from '@/config/endpoints';
+import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 
 const SocketContext = createContext<Socket | undefined>(undefined);
 
@@ -27,26 +28,18 @@ export const SocketProvider = ({
   type,
   children,
 }: SocketProviderProps) => {
-  const [socket, setSocket] = useState<Socket<SocketEvents>>();
-
-  const init = useCallback(async () => {
-    await fetch(process.env.BASE_URL ?? '' + endpoints.socket);
-    const newSocket = io({
-      path: process.env.BASE_URL ?? '',
-      query: { id, user, type },
-    });
-    setSocket(newSocket);
-  }, [id, user, type]);
+  const [socket, setSocket] =
+    useState<Socket<DefaultEventsMap, DefaultEventsMap>>();
 
   useEffect(() => {
-    if (!socket && id) {
-      init();
-    }
+    const socketIo = io({ query: { id, user, type } });
+
+    setSocket(socketIo);
 
     return () => {
-      socket?.disconnect();
+      socketIo.disconnect();
     };
-  }, [id, init, socket]);
+  }, [id, type, user]);
 
   return (
     <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>

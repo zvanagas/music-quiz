@@ -3,7 +3,9 @@ import { useState } from 'react';
 
 const PREFIX = 'mquiz-';
 
-export const useSessionStorage = (key: string): [string, Dispatch<React.SetStateAction<string>>] => {
+export const useSessionStorage = (
+  key: string
+): [string, Dispatch<React.SetStateAction<string>>] => {
   const keyWithPrefix = PREFIX + key;
   const [value, setValue] = useState<string>(() => {
     if (typeof window !== 'undefined') {

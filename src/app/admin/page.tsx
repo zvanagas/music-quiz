@@ -1,9 +1,11 @@
+'use client';
+
 import { endpoints } from '@/config/endpoints';
 import { useSessionStorage } from '@/hooks/use-session-storage.hook';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-const AdminLogin = () => {
+export default function AdminLogin() {
   const router = useRouter();
   const [name, setName] = useState<string>('');
   const [_, setUser] = useSessionStorage('user');
@@ -38,6 +40,4 @@ const AdminLogin = () => {
       </button>
     </div>
   );
-};
-
-export default AdminLogin;
+}

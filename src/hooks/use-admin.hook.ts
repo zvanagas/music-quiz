@@ -12,9 +12,8 @@ import { loadSongs, loadSong } from '@/utils';
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useCountdown } from './use-countdown.hook';
 import { useConfig } from './use-config.hook';
-import { endpoints } from '@/config/endpoints';
-import { useRouter } from 'next/router';
 import { SpotifyPlaylist } from '@/lib/spotify/types';
+import { endpoints } from '@/config/endpoints';
 
 export const useAdmin = () => {
   const [loadedSongs, setLoadedSongs] = useState<HTMLAudioElement[]>([]);
@@ -26,7 +25,6 @@ export const useAdmin = () => {
   const [guessLog, setGuessLog] = useState<PlayerGuess[]>([]);
   const [victorySong, setVictorySong] = useState<HTMLAudioElement | null>(null);
   const [playlistId, setPlaylistId] = useState<string>('');
-  const { query } = useRouter();
   const socket = useSocket();
   const sortedPlayers = leaderboard.sort((a, b) => b.score - a.score);
   const previousStageSong = useMemo(
@@ -226,7 +224,6 @@ export const useAdmin = () => {
     leaderboard,
     setPlaylistId,
     stages: config.stages,
-    roomId: query.id,
     handleStagesUpdate,
   };
 };
