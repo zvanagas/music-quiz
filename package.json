@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "tsx src/server.ts",
     "build": "next build && node prepare.mjs",
-    "start": "next start",
+    "start": "NODE_ENV=production node src/server.ts",
     "lint": "next lint",
     "prepare": "husky",
     "migrate": "tsx src/lib/db/migrate.ts"

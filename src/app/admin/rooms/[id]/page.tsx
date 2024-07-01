@@ -1,16 +1,22 @@
+'use client';
+
 import { SocketProvider } from '@/contexts/socket-provider';
 import { Admin } from '@/components/admin';
 import { useSessionStorage } from '@/hooks/use-session-storage.hook';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { endpoints } from '@/config/endpoints';
 
-const AdminWithSocket = () => {
+type Params = {
+  id: string;
+};
+
+const AdminWithSocket = ({ params }: { params: Params }) => {
   const [user] = useSessionStorage('user');
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const router = useRouter();
 
-  const roomId = router.query.id;
+  const roomId = params.id;
 
   useEffect(() => {
     async function loadRoom() {
@@ -40,12 +46,8 @@ const AdminWithSocket = () => {
   }
 
   return (
-    <SocketProvider
-      id={Array.isArray(roomId) ? roomId[0] : roomId}
-      user={user}
-      type="admin"
-    >
-      <Admin />
+    <SocketProvider id={roomId} user={user} type="admin">
+      <Admin roomId={roomId} />
     </SocketProvider>
   );
 };

@@ -1,3 +1,5 @@
+'use client';
+
 import { Toast } from '@/components/toast';
 import { PropsWithChildren, createContext, useContext, useState } from 'react';
 

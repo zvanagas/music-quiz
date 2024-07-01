@@ -9,11 +9,11 @@ import {
   Results,
 } from '@/types/events';
 import { GameState } from '@/types/game-state';
-import { useRouter } from 'next/router';
 import { useState, useEffect, useCallback } from 'react';
 import { useCountdown } from './use-countdown.hook';
 import { useSessionStorage } from './use-session-storage.hook';
 import { useConfig } from './use-config.hook';
+import { useRouter } from 'next/navigation';
 
 export const usePlay = () => {
   const [user] = useSessionStorage('user');

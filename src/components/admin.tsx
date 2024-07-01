@@ -7,9 +7,13 @@ import { Config } from './config';
 import { Card } from './card/card';
 import { CardBody } from './card/card-body';
 import { GameStartCard } from './game-start-card';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
-export const Admin = () => {
+type Props = {
+  roomId?: string;
+};
+
+export const Admin = ({ roomId }: Props) => {
   const {
     startGame,
     resetGame,
@@ -25,7 +29,6 @@ export const Admin = () => {
     playlistId,
     setPlaylistId,
     stages,
-    roomId,
     handleStagesUpdate,
   } = useAdmin();
   const { push } = useRouter();
@@ -37,7 +40,7 @@ export const Admin = () => {
           <p className="text-white">Room ID: {roomId}</p>
           <button
             className="py-2 px-4 bg-green-600 rounded disabled:opacity-60 disabled:cursor-not-allowed hover:bg-green-500 transition-colors text-white"
-            onClick={() => push(`/rooms/${roomId}/leaderboard`)}
+            onClick={() => push(`/rooms/${roomId}/view`)}
           >
             View
           </button>
