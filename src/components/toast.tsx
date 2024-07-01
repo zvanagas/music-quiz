@@ -9,7 +9,8 @@ export const Toast = ({ text, type = 'success' }: Props) => {
   }
 
   const getClasses = () => {
-    let classes = 'absolute bottom-0 p-2 w-full rounded-t';
+    let classes = 'absolute bottom-0 p-2 w-full rounded-t text-white';
+
     switch (type) {
       case 'success': {
         classes += ' bg-green-500';

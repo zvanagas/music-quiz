@@ -36,7 +36,7 @@ app.prepare().then(() => {
       socket.emit(Events.Players, Object.values(clients));
     }
 
-    socket.on(Events.Join, async () => {
+    socket.on(Events.Join, () => {
       socket.emit(Events.Players, Object.values(clients));
       socket
         .to([adminRoom, userRoom])
