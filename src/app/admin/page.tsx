@@ -3,6 +3,7 @@
 import { endpoints } from '@/config/endpoints';
 import { useToast } from '@/contexts/toast-provider';
 import { useSessionStorage } from '@/hooks/use-session-storage.hook';
+import { Room } from '@/lib/db/rooms/types';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -32,12 +33,17 @@ export default function AdminLogin() {
     try {
       const response = await fetch(`${endpoints.rooms}/${roomId}`);
 
-      if (response.ok) {
-        router.push(`/rooms/${roomId}/admin`);
+      if (!response.ok) {
+        show('Failed to join', 'error');
         return;
       }
 
-      show('Failed to join', 'error');
+      const room: Room = await response.json();
+
+      if (room.userName) {
+        setUser(room.userName);
+        router.push(`/rooms/${roomId}/admin`);
+      }
     } catch {
       show('Failed to join', 'error');
     }
