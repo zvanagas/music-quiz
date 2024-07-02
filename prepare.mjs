@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { rmSync, mkdirSync, cp } from 'fs';
 
 const dir = 'dist/';

@@ -19,26 +19,17 @@ export const shuffle = (array: string[]): string[] => {
   return array;
 };
 
-export const loadSong = (
-  path: string,
-  isAbsoluteUrl?: boolean
-): Promise<HTMLAudioElement | null> =>
+export const loadSong = (path: string): Promise<HTMLAudioElement | null> =>
   new Promise((resolve) => {
     if (typeof Audio === 'undefined') {
       return resolve(null);
     }
 
-    const audio = new Audio(
-      isAbsoluteUrl ? path : `${process.env.BASE_URL ?? ''}/mp3/${path}`
-    );
+    const audio = new Audio(path);
     audio.oncanplay = (e) => resolve(e.target as HTMLAudioElement);
   });
 
-export const loadSongs = async (
-  songs: Song[],
-  stagesCount: number,
-  isAbsoluteUrl?: boolean
-) => {
+export const loadSongs = async (songs: Song[], stagesCount: number) => {
   let songsCopy = [...songs];
   const songList: HTMLAudioElement[] = [];
   const answers: AnswersData[] = [];
@@ -46,7 +37,7 @@ export const loadSongs = async (
   for (const _ of stages) {
     const randomSongIndex = Math.floor(Math.random() * songsCopy.length);
     const selectedSong = songsCopy[randomSongIndex];
-    const loadedSong = await loadSong(selectedSong.url, isAbsoluteUrl);
+    const loadedSong = await loadSong(selectedSong.url);
     const incorrectAnswers = songs
       .filter(({ key }) => key !== selectedSong.key)
       .map(({ answer }) => answer);

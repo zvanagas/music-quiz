@@ -1,8 +1,8 @@
 import {
   WAIT_TIME,
   GUESS_TIME,
-  VICTORY_SONG,
   VOLUME_POINT,
+  VICTORY_SONG,
 } from '@/config/constants';
 import { useSocket } from '@/contexts/socket-provider';
 import { Events } from '@/enums/events';
@@ -12,7 +12,7 @@ import { loadSongs, loadSong } from '@/utils';
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useCountdown } from './use-countdown.hook';
 import { useConfig } from './use-config.hook';
-import { SpotifyPlaylist } from '@/lib/spotify/types';
+import { SpotifyPlaylist, SpotifyTrack } from '@/lib/spotify/types';
 import { endpoints } from '@/config/endpoints';
 
 export const useAdmin = () => {
@@ -151,24 +151,29 @@ export const useAdmin = () => {
 
   const startGame = useCallback(async () => {
     setGameState('loading');
-    const spotify: SpotifyPlaylist = await (
-      await fetch(`${endpoints.spotify}?id=${playlistId}`)
+    const playlist: SpotifyPlaylist = await (
+      await fetch(`${endpoints.spotify}?id=${playlistId}&type=playlist`)
     ).json();
 
-    if (!spotify.songs.length) {
+    if (!playlist.songs.length) {
       setGameState('idle');
       return;
     }
 
     const { answers, songList } = await loadSongs(
-      spotify.songs,
-      config.stages,
-      true
+      playlist.songs,
+      config.stages
     );
+
     if (!victorySong) {
-      const victory = await loadSong(VICTORY_SONG);
+      const victoryTrack: SpotifyTrack = await (
+        await fetch(`${endpoints.spotify}?id=${VICTORY_SONG}&type=track`)
+      ).json();
+
+      const victory = await loadSong(victoryTrack.url);
       setVictorySong(victory);
     }
+
     setLoadedSongs(songList);
     setAnswersData(answers);
     setCurrentStage((prevStage) => prevStage + 1);

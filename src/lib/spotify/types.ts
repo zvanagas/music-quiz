@@ -39,3 +39,13 @@ export type SpotifyPlaylist = {
   images: Image[];
   songs: Song[];
 };
+
+export type SpotifyTrackApi = {
+  name: string;
+  preview_url: string;
+};
+
+export type SpotifyTrack = {
+  name: string;
+  url: string;
+};
