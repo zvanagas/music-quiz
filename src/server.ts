@@ -24,6 +24,12 @@ app.prepare().then(() => {
     const userRoom = `${id}-${Rooms.Players}`;
     const room = type === 'admin' ? adminRoom : userRoom;
 
+    function getUsers() {
+      const keys = io.sockets.adapter.rooms.get(userRoom)?.keys();
+
+      return keys ? Array.from(keys).map((key) => clients[key]) : [];
+    }
+
     if (id && typeof id === 'string' && typeof user === 'string') {
       await socket.join(room);
 
@@ -32,15 +38,15 @@ app.prepare().then(() => {
       }
     }
 
-    if (type === 'admin' && Object.values(clients).length) {
-      socket.emit(Events.Players, Object.values(clients));
+    if (type === 'admin') {
+      const users = getUsers();
+      socket.emit(Events.Players, users);
     }
 
     socket.on(Events.Join, () => {
-      socket.emit(Events.Players, Object.values(clients));
-      socket
-        .to([adminRoom, userRoom])
-        .emit(Events.Players, Object.values(clients));
+      const users = getUsers();
+      socket.emit(Events.Players, users);
+      socket.to([adminRoom, userRoom]).emit(Events.Players, users);
     });
     socket.on(Events.PlayerGuess, (msg) =>
       socket.to(adminRoom).emit(Events.PlayerGuess, msg)
@@ -63,9 +69,8 @@ app.prepare().then(() => {
       delete clients[socket.id];
 
       if (type === 'user') {
-        socket
-          .to([adminRoom, userRoom])
-          .emit(Events.Players, Object.values(clients));
+        const users = getUsers();
+        socket.to([adminRoom, userRoom]).emit(Events.Players, users);
       }
     });
   });
